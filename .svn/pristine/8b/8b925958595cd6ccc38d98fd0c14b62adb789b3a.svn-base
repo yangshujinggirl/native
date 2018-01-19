@@ -1,0 +1,58 @@
+import React,{Component} from 'react';//引入react
+import './index.scss?l'//引入样式
+import { swiper } from 'swiper';
+import LazyLoad from 'lazyLoad';//引入lazyLoad组件
+//创建banner组件
+export default class Banner extends Component{
+	//构建函数
+	constructor(props){
+		super(props);
+	}
+
+	//接收新的prop
+	componentWillReceiveProps(props){
+	}	
+	//组件渲染完成
+	componentDidMount(){
+		this.initSwiper();
+	}
+	/**
+	 * 初始化滚动
+	 * @return {[type]} [description]
+	 */
+	initSwiper(){
+		var swiper = new Swiper('.swiper-container', {
+			pagination: '.swiper-pagination',
+			paginationClickable: true,
+			autoplay: 2000,//可选选项，自动滑动
+		});
+	}
+	render(){
+		let tempList=[];
+		//获取图片列表
+		this.props.list.map(function(elem, index) {
+			tempList.push(<div className='swiper-slide' key={elem.bannerId}>
+						<a href={elem.linkUrl}><LazyLoad data-reallySrc={elem.bannerUrl} data-refValue={`img${elem.bannerId}`} /></a>
+						</div>
+					);	
+				
+		})
+		//根据状态渲染页面
+		let banner;	
+		let dealBanner=()=>{
+			banner=
+			<div className='swiper-container'>
+				<div className='swiper-wrapper'>	
+					{ tempList }
+				</div>	
+				<div className='swiper-pagination'></div>	
+			</div>
+		}	
+		dealBanner();	
+		return(
+			<div>
+				{ banner }
+			</div>
+		)
+	}
+}

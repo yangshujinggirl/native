@@ -1,0 +1,53 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.activity_show {
+	$hight:#ff416a;
+	.banner {
+		width: 100%;
+	}
+	.wrap {
+		padding: 0 (40rem/$num);
+		.award {
+			margin: (80rem/$num) 0;
+		}
+		.head {
+			font-size: (38rem/$num);
+			color: $hight;
+		}
+		.twoCode {
+			width: (563rem/$num);
+			height: (361rem/$num);
+			background:url(../../../image/activity_love/activity_love_show_01.png);
+			background-size:contain;
+		}
+		.text {
+			font-size: (24rem/$num);
+			line-height: (50rem/$num);
+			margin-top: (40rem/$num);
+			.hight {
+				font-size: (30rem/$num);
+				color: $hight;
+			}
+		}
+	}
+	.explain {
+		.prize {
+			position: relative;
+			.thePrize {
+				width: (214rem/$num);
+				height: (98rem/$num);
+				position:absolute;
+				top:(20rem/$num);
+				right: (0rem/$num);
+			}
+		}
+		.five {
+			color: $hight;
+		}
+		.footer {
+			padding:(30rem/$num) 0;
+			text-align: center;
+			color: $hight;
+		}
+
+	}
+}

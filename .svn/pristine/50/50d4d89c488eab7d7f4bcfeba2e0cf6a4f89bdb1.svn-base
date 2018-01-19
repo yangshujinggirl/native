@@ -1,0 +1,24 @@
+import React,{Component} from 'react';//引入react
+import './index.scss?l'//引入样式
+
+export default class Logo extends Component{
+
+	//构建函数
+	constructor(props){
+		super(props);
+	}
+	/**
+	 * 去首页
+	 * @return {[type]} [description]
+	 */
+	goHome=()=>{
+		window.location.href='../home/home.html';
+	}
+	render(){
+		let logoCss=`logo ${this.props.logoCss}`;
+		return(
+			<div className={logoCss} onClick={this.goHome}></div>
+		)
+
+	}
+}

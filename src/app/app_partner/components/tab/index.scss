@@ -1,0 +1,8 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+
+	.recommend {
+		display: none;
+		&.selected {
+			display: block;
+		}
+	}

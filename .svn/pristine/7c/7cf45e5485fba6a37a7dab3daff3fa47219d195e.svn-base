@@ -1,0 +1,57 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.btn{
+  width: (570rem/$num);
+  margin: 0 (35rem/$num);
+  border-radius: (6rem/$num);
+  height: (90rem/$num);
+  line-height: (90rem/$num);
+  font-size: (36rem/$num);
+  text-align: center;
+  -webkit-transform: translateZ(0);
+  //按钮实心状态
+  &.solid{
+    color: $color-white;
+    background: #ff6600;
+    background: linear-gradient(to right, #ff9a00,50%, #ff6600);
+    background: -webkit-linear-gradient(left, #ff9a00,50%, #ff6600);
+    background: -moz-linear-gradient(left center, #ff9a00, #ff6600);
+    background: -webkit-gradient(linear, left center, right center,from(#ff9a00), to(#ff6600));
+    background: -o-linear-gradient(left,#ff9a00, #ff6600);
+    background: -ms-linear-gradient(left,#ff9a00, #ff6600);
+  }
+  //按钮空心状态
+  &.hollow{
+    color: $color-orange;
+    border: 1px solid $color-orange;
+    background-color: #fff;
+  }
+  //按钮不可点击状态
+  &.disabled{
+    color: $color-white;
+    background-color: $color-gray5;
+  }
+}
+.btn-clicked:after {
+    content:'';
+    position:absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius:inherit;
+    border:0 solid $color-orange;
+    opacity:.3;
+    -webkit-animation:buttonEffect .5s ease forwards;
+    animation:buttonEffect .5s ease forwards;
+    display:block;
+}
+@-webkit-keyframes buttonEffect {
+    to {
+      opacity:0;
+      top:(-20rem/$num);
+      left:(-20rem/$num);
+      bottom:(-20rem/$num);
+      right:(-20rem/$num);
+      border-width:(10rem/$num);
+    }
+}

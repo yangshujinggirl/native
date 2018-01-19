@@ -1,0 +1,28 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.checkbox {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  vertical-align: middle;
+  &.checked {
+    background: url(../../../image/common/checkbox.png) no-repeat center;
+    background-size: contain;
+  }
+}
+.accept{
+    text-align: center;
+    font-size: (24rem/$num);
+    // position: relative;
+    .agree{
+      margin-left: (10rem/$num);
+      vertical-align: middle;
+    }
+    .protocol{
+      // position: relative;
+      // top: (4rem/$num);
+      color: $color-blue;
+      vertical-align: middle;
+    }
+  }

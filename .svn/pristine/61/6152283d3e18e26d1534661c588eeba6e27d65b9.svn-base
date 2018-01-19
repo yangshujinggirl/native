@@ -1,0 +1,128 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.newregister{
+  background: #ffa52e;
+  .banner{
+    width: (640rem/$num);
+    height: (562rem/$num);
+    background: url(../../../image/newregister/newregister-banner.png) no-repeat center center;
+    background-size: cover;
+  }
+  .thousands{
+    width: (590rem/$num);
+    height: (446rem/$num);
+    background: url(../../../image/newregister/thousands.png) no-repeat;
+    background-size: cover;
+    margin: (40rem/$num) auto 0;
+    .thousands-cont{
+      width: (540rem/$num);
+      line-height: (40rem/$num);
+      padding-top: (120rem/$num);
+      font-size: (24rem/$num);
+      margin: 0 auto;
+      color: #40220f;
+    }
+  }
+  .security{
+    width: (588rem/$num);
+    height: (934rem/$num);
+    background: url(../../../image/newregister/new-ba.png) no-repeat;
+    background-size: cover;
+    margin: (60rem/$num) auto;
+    .bigicon{
+      width: (442rem/$num);
+      margin: 0 auto;
+    }
+    .icon{
+      width: (442rem/$num);
+      display: inline-block;
+      height: (174rem/$num);
+    }
+    .new1{
+      background: url(../../../image/newregister/new-icon1.png) no-repeat;
+      background-size: cover;
+      margin-top: (145rem/$num);
+    }
+    .new2{
+      background: url(../../../image/newregister/new-icon2.png) no-repeat;
+      background-size: cover;
+      margin-top: (30rem/$num);
+    }
+    .new3{
+      background: url(../../../image/newregister/new-icon3.png) no-repeat;
+      background-size: cover;
+      margin-top: (30rem/$num);
+    }
+    .security-cont{
+      font-size: (24rem/$num);
+      margin-top: (30rem/$num);
+    }
+  }
+  .double{
+    width: (588rem/$num);
+    height: (1502rem/$num);
+    background: url(../../../image/newregister/new-fanbei.png) no-repeat;
+    background-size:cover;
+    margin: (60rem/$num) auto 0;
+    .first{
+      width: (502rem/$num);
+      margin: 0 auto;
+    }
+    .first1{
+      width: (502rem/$num);
+      height: (252rem/$num);
+      display: inline-block;
+      background: url(../../../image/newregister/new-first.png) no-repeat;
+      background-size: cover;
+      margin-top: (150rem/$num);
+    }
+    .prod{
+      text-align: center;
+      margin-top: (30rem/$num);
+      .filed,.item{
+        width: (200rem/$num);
+        display: inline-block;
+        .big{
+          font-size: (60rem/$num);
+          color: $color-orange;
+          .teshu{
+            font-size: (36rem/$num);
+          }
+        }
+        .small{
+          font-size: (22rem/$num);
+          color: $color-gray2;
+        }
+      }
+      .item{
+        .big{
+          color: $color-gray1;
+        }
+      }
+    }
+    .qitou{
+        font-size: (22rem/$num);
+        color: $color-gray2;
+        text-align: center;
+        margin-top: (25rem/$num);
+      }
+    .juli{
+      margin-top: (45rem/$num);
+    }
+    .new2-pk{
+      width: (588rem/$num);
+      height: (528rem/$num);
+      background: url(../../../image/newregister/new2-pk.png) no-repeat;
+      background-size: cover;
+      margin-top: (65rem/$num);
+    }
+    .footer{
+      font-size: (24rem/$num);
+      padding: (50rem/$num) (30rem/$num);
+    }
+  }
+  .last{
+    width: (588rem/$num);
+    font-size: (24rem/$num);
+    margin: (60rem/$num) auto 0;
+  }
+}

@@ -1,0 +1,12 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.button{
+	font-size: .7rem;
+	color: $color-gray1;
+	margin: 20px auto;
+	margin-bottom: 0;
+	border: 1px solid $color-gray1;
+	width: 5rem;
+	padding: .5rem;
+	border-radius: 5px;
+	text-align: center;
+}

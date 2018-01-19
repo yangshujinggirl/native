@@ -1,0 +1,46 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.account-history{
+  .cont-top{
+    height: (85rem/$num);
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: box;
+    text-align: center;
+    .item{
+      line-height: (85rem/$num);
+      font-size: (26rem/$num);
+      color: $color-gray2;
+      -moz-box-flex: 1;
+      -webkit-box-flex: 1;
+      box-flex:1;
+    }
+  }
+  .cont-bottom{
+    ul{
+      text-align: center;
+      padding: 0 (40rem/$num);
+      border-top: (1rem/$num) solid $color-gray4;
+      background-color: $color-white;
+      li{
+        height: (80rem/$num);
+        line-height: (80rem/$num);
+        color: $color-gray1;
+        font-size: (28rem/$num);
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-box;
+        display: box;
+        span{
+          -moz-box-flex: 1;
+          -webkit-box-flex: 1;
+          box-flex:1;
+          display: block;
+        }
+      }
+      .under{
+        border-bottom: (1rem/$num) solid $color-gray4;
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.Container {
+	$font:(30rem/$num);
+	.tabOnelist {
+		padding:0 (38rem/$num);
+		display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: box;
+		.item {
+			text-align: center;
+			line-height: (98rem/$num);
+			font-size:$font;
+			color: $color-gray2;
+			-moz-box-flex: 1; 
+    	-webkit-box-flex: 1;
+			&.selected {
+				color: $color-orange;
+				border-bottom:(3rem/$num) solid $color-orange;
+			}
+		}
+	}
+	.banner {
+		width: 100%;
+		img {
+			width: 100%;
+		}
+	}
+	.info {
+		padding:0 (38rem/$num);
+		.head {
+			font-size:$font;
+			line-height: (80rem/$num);
+			color: $color-gray1;
+			border-bottom: (1rem/$num) solid  $color-gray2;
+		}
+		.title,.text {
+			font-size:(28rem/$num);
+		}
+		.title {
+			color:$color-black;
+			line-height: (80rem/$num);
+		}
+		.text {
+			color:$color-gray1;
+			margin-bottom:(36rem/$num);
+			.tint {
+				color: $color-gray2;
+			}
+		}
+	}
+}
+.wrap-share-icon {
+    display: none;
+}

@@ -1,0 +1,14 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.wrap-input{
+	text-align: center;
+	.input{
+		font-size: .7rem;
+		color: $color-gray1;
+		text-indent: .5rem;
+		border-bottom: 1px solid #333;
+	}
+}
+
+.wrap{
+	margin: 50px auto;
+}

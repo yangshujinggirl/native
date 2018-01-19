@@ -1,0 +1,270 @@
+import React,{Component} from 'react';//引入react
+import './index.scss?l'//引入样式
+import Alert from 'alert';//引入alert组件
+import Loading from 'loading';//引入loading组件
+import Banner from 'banner';//引入banner组件
+import Footer from 'footer';//引入公共底部组件
+import LoginOver from 'loginOver';//引入登录超时组件
+import LazyLoad from 'lazyLoad';//引入lazyLoad组件
+/**
+ * 引入fetch
+ */
+import 'fetchJs';
+import 'whatwg-fetch';
+import { config,strUtil,bussinessUtil,sessionUtil,dataUtil } from 'publicJs';
+var sessionKey=sessionUtil.get('sessionKey');//获取sessionkey
+var bannerList;//banner数据
+var productList=[];//product数据
+var index=0;//加载次数
+var platformAllAmount=0;//平台累投数
+var platformRegisterNum=0;//平台注册人数
+//创建banner组件
+export default class Container extends Component{
+	//构建函数
+	constructor(props){
+		super(props);
+		this.state={
+      alertText: '',//提示框文本
+      alertShow: false,//提示框默认不显示
+			isLoading: true,//loading状态
+      loginShow: false, //是否显示登录超时
+		};
+	}
+	//组件渲染之前
+	componentWillMount(){
+		let pageName='home';
+		let pageUrl=window.location.href;
+		bussinessUtil.dealPage(pageName,pageUrl);
+	}
+	//组件渲染完成
+	componentDidMount(){		
+    /**
+     * 适配屏幕
+     */
+    bussinessUtil.configScreen();
+		this.getBannerData();
+    this.getListData();
+    this.getPageData();
+	}
+  //修改提示框内容
+  updateText=(text,show)=>{
+    this.setState({alertText: text,alertShow: show});
+    //如果show为true
+    if(show){
+      setTimeout(()=>{this.setState({alertShow: false});},config.alertTime);
+    }
+  }
+  /**
+   * 获取平台累投,平台用户人数
+   * @return {[type]} [description]
+   */
+  getPageData=()=>{
+    let url=`/homepage/recommend`;
+    let param=`sessionKey=${sessionKey}&currentPage=1&pageSize=10`;
+    let successCall=(data)=>{
+      platformAllAmount=strUtil.formatData(data.data.platformAllAmount);//平台累投
+      platformRegisterNum=strUtil.formatData(data.data.platformRegisterNum);//平台注册人数
+      if(index==2){
+        this.setState({isLoading: false}); 
+      }else{
+        index++;
+      }       
+    }
+    let errorCall=(data)=>{
+      this.setState({isLoading: false});
+      /**
+       * 如果resultCode等于10000006,则弹出去登录的弹窗,否则就是正常的提示弹窗
+       */
+        if(data.resultCode==config.loginTimeOver){
+            this.setState({loginShow: true});
+        }else{
+          let error=dataUtil.getMessage(data.resultCode);
+          this.updateText(error,true);//更新弹窗
+        }  
+    }
+    let errorCall2=(e)=>{
+      this.setState({isLoading: false});
+      this.updateText(e,true);//更新弹窗
+    }
+    dataUtil.getData(url,'POST',param,successCall,errorCall,errorCall2);
+  }
+  /**
+   * 获取首页banner数据
+   * @return {[type]} [description]
+   */
+  getBannerData=()=>{
+    let url=`/h5/banner/list/get`;
+    let param=`sessionKey=${sessionKey}`;
+    let successCall=(data)=>{
+      bannerList=strUtil.formatData(data.data.bannerList);
+      if(index==2){
+        this.setState({isLoading: false}); 
+      }else{
+        index++;
+      }       
+    }
+    let errorCall=(data)=>{
+      this.setState({isLoading: false});
+      /**
+       * 如果resultCode等于10000006,则弹出去登录的弹窗,否则就是正常的提示弹窗
+       */
+        if(data.resultCode==config.loginTimeOver){
+            this.setState({loginShow: true});
+        }else{
+          let error=dataUtil.getMessage(data.resultCode);
+          this.updateText(error,true);//更新弹窗
+        }  
+    }
+    let errorCall2=(e)=>{
+      this.setState({isLoading: false});
+      this.updateText(e,true);//更新弹窗
+    }
+    dataUtil.getData(url,'POST',param,successCall,errorCall,errorCall2);
+  }
+  /**
+   * 获取理财列表数据
+   * @return {[type]} [description]
+   */
+  getListData=()=>{
+    let url=`/product/lists`;
+    let param=`sessionKey=${sessionKey}&currentPage=0&pageSize=25`;
+    let successCall=(data)=>{
+      var list=strUtil.formatData(data.data.productList);//获取首页数据
+      //前端做过滤,清除已经过期的标的
+      for(var i=0;i<list.length;i++){
+        if(list[i].productStatus=='1'||list[i].productType=='TYB'){
+          productList.push(list[i]);
+        }
+      }
+      if(index==2){
+        this.setState({isLoading: false}); 
+      }else{
+        index++;
+      } 
+    }
+    let errorCall=(data)=>{
+      this.setState({isLoading: false});
+      /**
+       * 如果resultCode等于10000006,则弹出去登录的弹窗,否则就是正常的提示弹窗
+       */
+        if(data.resultCode==config.loginTimeOver){
+          this.setState({loginShow: true});
+        }else{
+          let error=dataUtil.getMessage(data.resultCode);
+          this.updateText(error,true);//更新弹窗
+        }  
+    }
+    let errorCall2=(e)=>{
+      this.setState({isLoading: false});
+      this.updateText(e,true);//更新弹窗
+    }
+    dataUtil.getData(url,'POST',param,successCall,errorCall,errorCall2);
+  }
+  /**
+   * 去详情页
+   * @return {[type]} [description]
+   */
+  goDetail=(type=1,id)=>{
+    /**
+     * 标的类型 1跳转正常的详情页 否则跳转体验标页面
+     * @param  {[type]} type [description]
+     * @return {[type]}      [description]
+     */
+    if(type==1){
+      window.location.href=`../productDetail/productDetail.html?id=${id}`;
+    }else{
+      window.location.href=`../experience/experience.html?id=${id}`;
+    }
+    
+  }
+	render(){
+        let home;
+        let dealHome=()=>{
+          if(this.state.isLoading){
+             home=
+             <div>
+             <Loading loading={this.state.isLoading} />  
+             <Alert text={this.state.alertText} show={this.state.alertShow} />
+             </div>     
+          }else{
+            let product=[];
+            let dealProduct=()=>{
+            productList.map((ele, index)=> {
+            var progressStyle = {
+              width: strUtil.toFixed((parseFloat(strUtil.formatData(ele.productTotalAmount))-parseFloat(strUtil.formatData(ele.productRemainAmount)))*100/(parseFloat(strUtil.formatData(ele.productTotalAmount))),0)+'%'
+            };
+            product.push(
+            <div className={`project ${strUtil.formatData(ele.productType)=='TYB'?'':strUtil.formatData(ele.productStatus)=='1'?'':'no'}`} key={strUtil.formatData(ele.productId)} 
+            onClick={strUtil.formatData(ele.productType)=='TYB'?this.goDetail.bind(this,2,ele.productId):this.goDetail.bind(this,1,ele.productId)}>
+              <div className="name">
+                <p className="tx">{strUtil.formatData(ele.productName)}</p>
+              </div>
+              <div className="projectDetail">
+                <div className="prop">
+                  <div className="fr history">
+                    <span className="field">{strUtil.formatData(ele.annualIncomeText)}</span>
+                    <span className="caption">年化收益率</span>
+                  </div>
+                  <div className="fr">
+                    <span className="field">{strUtil.formatData(ele.convertDay)}<i className="unit">天</i></span>
+                    <span className="caption">投资期限</span>
+                  </div>
+                  <div className="fr money">
+                    <span className="field">{ele.productType=='TYB'?'':strUtil.formatMiriade(strUtil.formatData(ele.productRemainAmount))}</span>
+                    <span className="caption">{ele.productType=='TYB'?'':'剩余金额'}</span>
+                  </div>
+                </div>
+                <div className="progressMap">
+                  <div className="inner" style={progressStyle}></div>
+                </div>
+                <div className="over"></div>
+              </div>
+            </div>
+            )
+          })
+        }
+        dealProduct();
+        let Num=strUtil.formatMoney(strUtil.formatData(platformAllAmount));//获取处理过的投资金额
+        let Person=strUtil.formatPerson(strUtil.formatData(platformRegisterNum));//获取处理过的平台人数
+        home=
+        <div className="home">
+          < Banner list={bannerList} />
+          <div className="dataShow">
+            <div className="item">
+              <h1 className="dataHead one">平台累计投资</h1>
+              <p className="dataNum">
+                <span className="highLight">{strUtil.formatData(Num.hundredMillion)}</span>
+                亿
+                <span className="highLight">{strUtil.formatData(Num.kiloMillion)}</span>
+                万元
+              </p>
+            </div>
+            <div className="item">
+              <h1 className="dataHead two">平台用户数</h1>
+              <p className="dataNum">
+                <span className="highLight">{strUtil.formatData(Person.million)}</span>
+                万
+                <span className="highLight">{strUtil.formatData(Person.single)}</span>
+                人
+              </p>
+            </div>
+          </div>
+
+          <div className="project-list">
+            {product}
+          </div>
+          <Alert text={this.state.alertText} show={this.state.alertShow} />      
+          <LoginOver type='2' show={this.state.loginShow} />
+          <Footer type='1' />
+        </div>
+      }
+
+    }
+    dealHome();
+		return(
+        <div>
+        { home } 
+        </div>   
+		)
+	}
+}

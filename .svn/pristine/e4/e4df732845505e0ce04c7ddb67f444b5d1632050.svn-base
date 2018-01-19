@@ -1,0 +1,11 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.wrap-textarea{
+	margin-top: 10px;
+	text-align: center;
+}
+.textarea{
+	font-size: .7rem;
+	color: $color-gray1;
+	padding: .5rem .25rem;
+	border: 1px solid rgba(0,0,0,.5);
+}

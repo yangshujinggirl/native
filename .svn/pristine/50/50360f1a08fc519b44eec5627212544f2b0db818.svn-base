@@ -1,0 +1,92 @@
+@import '../../../.././utils/scss/public.scss'; //引入公共scss
+
+/**
+ * 即时消失的弹出框 类型为1
+ */
+
+.alert-type1 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    width: 8.5rem;
+    padding: 1rem;
+    border-radius: .25rem;
+    background-color: rgba(51, 51, 51, .9);
+    font-size: .7rem;
+    color: $color-white;
+    text-align: center;
+    z-index: 999;
+}
+
+
+/**
+ * 灰色蒙层
+ */
+
+.cover {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+
+
+/**
+ * 确认取消弹窗 类型为2
+ */
+
+.alert-type2 {
+    width: (500rem/$num);
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    background-color: $color-white;
+    border-radius: (10rem/$num);
+    z-index: 999;
+    text-align: center;
+    .title {
+        font-size: (32rem/$num);
+        margin: (50rem/$num) auto 0;
+    }
+    .wrap-btn {
+        margin: (50rem/$num) (25rem/$num);
+        display: -webkit-box;
+        &.no-title{
+            margin-bottom:(25rem/$num);
+        }
+    }
+    .alert-button {
+        display: block;
+        -webkit-box-flex: 1;
+        min-width: (200rem/$num);
+        height: (70rem/$num);
+        line-height: (70rem/$num);
+        border-radius: (5rem/$num);
+        font-size: (28rem/$num);
+    }
+    .button1 {
+        border: (1rem/$num) solid $color-orange;
+        color: $color-orange;
+    }
+    .button2 {
+        background-color: $color-orange;
+        color: $color-white;
+        margin-left: (15rem/$num);
+    }
+    .alert-content {
+        margin: (25rem/$num);
+        margin-bottom: 0;
+        font-size: (24rem/$num);
+        text-align: left;
+        .alert-tip {
+            color: $color-orange;
+        }
+    }
+}

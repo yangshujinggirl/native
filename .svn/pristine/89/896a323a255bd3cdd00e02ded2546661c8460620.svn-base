@@ -1,0 +1,116 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.account-security{
+  width: (640rem/$num);
+  .security-top{
+    height: (100rem/$num);
+    background-color: $color-white;
+    position: relative;
+    .wrap-input{
+      display: inline-block;
+    }
+    .input{
+      width: (360rem/$num);
+      font-size: (28rem/$num);
+      line-height: (100rem/$num);
+      color: $color-gray3;
+      text-indent: (30rem/$num);
+    }
+    .but{
+      width: (185rem/$num);
+      height: (70rem/$num);
+      line-height: (70rem/$num);
+      font-size: (30rem/$num);
+      position: absolute;
+      right: 0;
+      top: (15rem/$num);
+    }
+  }
+  .security-bottom{
+    width: (582rem/$num);
+    margin: 0 auto;
+    .return-tickets{
+      background: url(../../../image/account_security/account_security-bg1.png) no-repeat;
+      background-size: cover;
+      margin-top: (30rem/$num);
+      font-size: 0;
+      -webkit-text-size-adjust: none;
+      .tickets-left{
+        width: (215rem/$num);
+        height: (202rem/$num);
+        padding-top: (50rem/$num);
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        display: inline-block;
+        text-align: center;
+        vertical-align: top;
+        .item{
+          font-size: (48rem/$num);
+          color: $color-white;
+          text-align: bottom;
+          position: relative;
+          .samll{
+            font-size: (30rem/$num);
+            // position: relative;
+            // top: (20rem/$num);
+          }
+        }
+        .filed{
+          font-size: (24rem/$num);
+          color: $color-white;
+        }
+      }
+      .tickets-right{
+        width: (367rem/$num);
+        height: (202rem/$num);
+        display: inline-block;
+        text-align: left;
+        padding:(15rem/$num) 0 0 (30rem/$num);
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        vertical-align: top;
+        .tickets-jine{
+          font-size: (32rem/$num);
+          color: $color-black;
+        }
+        .cont,.expirydate{
+          font-size: (22rem/$num);
+          color: $color-gray2;
+          line-height: (30rem/$num);
+        }
+        .expirydate{
+          padding: (10rem/$num) 0;
+        }
+      }
+    }
+    .return-tickets2{
+      background: url(../../../image/account_security/account_security-bg2.png) no-repeat;
+      background-size: cover;
+      position: relative;
+      .tickets-right{
+        .tickets-jine,.cont,.expirydate{
+          color: #dddddd;
+        }
+      }
+      .coupon-state{
+        width: (148rem/$num);
+        height: (148rem/$num);
+        position: absolute;
+        right: (17rem/$num);
+        top: (16rem/$num);
+      }
+      .expired1{
+        @extend .coupon-state;
+        background: url(../../../image/account_security/yishiyong.png);
+        background-size: cover;
+      }
+      .expired2{
+        @extend .coupon-state;
+        background: url(../../../image/account_security/yiguoqi.png);
+        background-size: cover;
+      }
+    }
+    .return-tickets2:last-child{
+      margin-bottom: (30rem/$num);
+    }
+  }
+}

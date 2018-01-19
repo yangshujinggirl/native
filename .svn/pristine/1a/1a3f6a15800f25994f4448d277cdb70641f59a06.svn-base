@@ -1,0 +1,108 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+
+.info {
+  padding:0 (40rem/$num);
+  margin-top:(100rem/$num);
+  position:relative;
+  .moneyIcon {
+    width: (80rem/$num);
+    height: (102rem/$num);
+    background: url(../../../image/extension/extension_icon5.png) no-repeat center;
+    background-size: contain;
+    position: absolute;
+    top:40%;
+    left:(0rem/$num);
+    z-index: 99;
+  }
+  .wrapInfo {
+    padding:(90rem/$num) (30rem/$num)  (50rem/$num) (30rem/$num);
+    background-color: #FFF;
+    border-radius: 4px;
+    position:relative;
+    .sameWhy {
+      width: (308rem/$num);
+      height: (63rem/$num);
+      font-size: (28rem/$num);
+      color: #fff;
+      text-align: center;
+      font-weight: bold;
+      position: absolute;
+      top:(20rem/$num);
+      left:(-8rem/$num);
+    }
+    .introduce {
+      font-size: (28rem/$num);
+      color: #666666;
+    }
+    .list {
+      .item {
+        margin-top:(56rem/$num);
+        overflow: hidden;
+        zoom:1;
+        .bigicon {
+          width: (145rem/$num);
+          margin-right: (36rem/$num);
+          float: left;
+        }
+        .wind {
+          float: left;
+          vertical-align: top;
+          .sameHead {
+            font-size: (36rem/$num);
+            
+          }
+          .text {
+            font-size: (20rem/$num);
+          }
+        }
+        &:nth-child(2) {
+          .bigicon {
+            float: right;
+            margin:0 0 0 (36rem/$num);
+          }
+          .wind {
+            float: right;
+          }
+        }
+      }
+    }
+  }
+  .sameCopy {
+    text-align: center;
+    padding: (40rem/$num) 0;
+    font-size: (24rem/$num);
+    .num {
+      font-size: (28rem/$num);
+      font-weight: bold;
+    }
+  }
+}
+
+.why1 {
+  background: url(../../../image/extension/extension_icon1.png) no-repeat center;
+  background-size: contain;
+}
+.why2 {
+  background: url(../../../image/extension/extension_page2_icon1.png) no-repeat center;
+  background-size: contain;
+}
+.head1 {
+  color:#feb500;
+}
+.head2 {
+  color:#e3463b;
+}
+
+.copyRight1 {
+  color: #666;
+  .serveNum {
+    color: #ff3d0d
+  }
+}
+.copyRight2 {
+  color:#661201;
+  .serveNum {
+    color:#fed53f;
+  }
+}
+

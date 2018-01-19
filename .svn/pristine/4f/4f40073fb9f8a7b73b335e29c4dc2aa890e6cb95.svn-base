@@ -1,0 +1,70 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.footer-new{
+  height: (110rem/$num);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: $color-white;
+  display: flex;
+  display: -ms-flex;      /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  border-top: 1px solid $color-gray4;
+  align-items: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  .index,.myself,.prod{
+    flex: 1;
+    -webkit-flex: 1;          /* Chrome */
+    -ms-flex: 1;
+    text-align: center;
+    font-size: (24rem/$num);
+  }
+  .footer-icon{
+    width: (45rem/$num);
+    height: (45rem/$num);
+    display: inline-block;
+    margin-bottom: (6rem/$num);
+  }
+  .icon-home{
+    background: url(../../../image/icon/new_h5/0.png) no-repeat center;
+    background-size:contain;
+  }
+  .icon-myself{
+    background:url(../../../image/icon/new_h5/2.png) no-repeat center;
+    background-size:contain;
+  }
+  .icon-product {
+    background:url(../../../image/icon/new_h5/1.png) no-repeat center;
+    background-size:contain;
+  }
+  &.home-active{
+    .index {
+      color: $color-orange;
+    }
+    .icon-home{
+      background: url(../../../image/icon/new_h5/00.png) no-repeat center;
+      background-size:contain;
+    }
+  }
+  &.product-active{
+    .prod {
+      color: $color-orange;
+    }
+    .icon-product{
+      background: url(../../../image/icon/new_h5/11.png) no-repeat center;
+      background-size:contain;
+    }
+  }
+  &.account-active{
+    .myself {
+      color: $color-orange;
+    }
+    .icon-myself{
+      background: url(../../../image/icon/new_h5/22.png) no-repeat center;
+      background-size:contain;
+    }
+  }
+}

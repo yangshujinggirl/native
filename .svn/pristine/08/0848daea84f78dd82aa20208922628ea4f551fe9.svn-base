@@ -1,0 +1,139 @@
+@import '../../../.././utils/scss/public.scss'; //引入公共scss
+.Container {
+    font-size: (28rem/$num);
+    color: $color-gray2;
+    .t1,.t2 {
+        box-flex: 1;
+        -webkit-box-flex: 1;
+    }
+    .t1 {
+        text-align: left;
+        .high {
+            color: $color-orange;
+            padding:0 (5rem/$num);
+        }
+    }
+    .t2 {
+        text-align: right;
+        color: $color-black;
+    }
+    .pay {
+        display: -webkit-box;
+        display: box;
+        background-color: #FFF;
+        padding: (40rem/$num) (30rem/$num);
+        border-bottom: 1px solid $color-gray4;
+    }
+    .time {
+        padding:(10rem/$num) (30rem/$num) (30rem/$num);
+        font-size: (24rem/$num);
+    }
+    .contant {
+        position:relative;
+        background-color: #f7f9f9;
+        border: 1px solid $color-bg;
+        padding:(12rem/$num) (55rem/$num) (22rem/$num) (20rem/$num);
+        .detail {
+            display: -webkit-box;
+            display: box;
+            .t1 {
+                font-size:(30rem/$num);
+                line-height: (40rem/$num);
+                color: $color-gray1;
+            }
+            .t2 {
+                text-align: right;
+                font-size: (22rem/$num);
+                line-height: (40rem/$num);
+                color: $color-gray2;
+            }
+        }
+        .desc {
+            font-size: (22rem/$num);
+            line-height: (30rem/$num);
+            color: $color-gray2;
+            padding-top:(10rem/$num);
+            .money {
+                color: $color-gray1;
+            }
+        }
+        .yesIcon {
+            width:(30rem/$num);
+            height: (30rem/$num);
+            background:url(../../../image/icon/success_icon.png) no-repeat;
+            background-size: contain;
+            -webkit-background-size: contain;
+            position:absolute;
+            top:(50%);
+            margin-top: (-15rem/$num);
+            right: (15rem/$num);
+            display: none;
+            &.active{
+                display: block;
+            }
+        }
+    }
+    .security {
+        padding:0 (20rem/$num) (30rem/$num);
+        background-color: #FFF;
+        margin-bottom: (25rem/$num);
+        border-bottom: 1px solid $color-gray4;
+        border-top: 1px solid $color-gray4;
+        .change {
+            display: -webkit-box;
+            display: box;
+            padding:(24rem/$num) 0;
+            .t1 {
+                font-size: (22rem/$num);
+                color: $color-gray2;
+                .securityIcon {
+                    display: inline-block;
+                    width: (32rem/$num);
+                    height: (21rem/$num);
+                    background:url(../../../image/icon/icon_security.png) no-repeat;
+                    background-size: contain;
+                    -webkit-background-size: contain;
+                    margin-right: (10rem/$num);
+                    position:relative;
+                    top:(-6rem/$num);
+                }
+            }
+            .t2 {
+                color: #0267ae;
+                font-size: (24rem/$num);
+            }
+        }
+    }
+    .wait {
+        border-top: 1px solid $color-gray4;
+    }
+    .real {
+        .t1 {
+            color: $color-gray1;
+        }
+        .t2 {
+            color: $color-black;
+                font-size: (30rem/$num);
+        }
+    }
+    .check{
+        font-size: (24rem/$num);
+        padding:(35rem/$num) (35rem/$num) 0;
+        .agree {
+            vertical-align: middle;
+            padding:0 (14rem/$num) 0 (10rem/$num);
+        }
+        a{
+            color: $color-blue;
+            vertical-align: middle;
+        }
+    }
+    .parent {
+        padding:10px;
+        text-align: center;
+        margin-top: (112rem/$num);
+        .sure {
+            margin: 0;
+        }
+    }
+}

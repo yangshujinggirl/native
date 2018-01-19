@@ -1,0 +1,16 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.activity-list-content {
+  padding: (20rem/$num);
+  .activity-title {
+    font-size: (30rem/$num);
+    padding: (20rem/$num);
+  }
+  .link-url {
+    width: 100%;
+    display: inline-block;
+    margin-bottom: (20rem/$num);
+    img{
+      width: 100%;
+    }
+  }
+}

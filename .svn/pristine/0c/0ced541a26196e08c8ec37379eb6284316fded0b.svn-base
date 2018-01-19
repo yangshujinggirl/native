@@ -1,0 +1,20 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.serveProtocol {
+	padding:(80rem/$num) (34rem/$num);
+	
+	$hight:#ff416a;
+	.head {
+		font-size: (40rem/$num);
+		text-align:center;
+	}
+
+	.head1 {
+		font-size: (28rem/$num);
+		margin-top:(40rem/$num);
+	}
+	.it {
+		font-size: (24rem/$num);
+		margin-top:(40rem/$num);
+		line-height: (50rem/$num);
+	}
+}

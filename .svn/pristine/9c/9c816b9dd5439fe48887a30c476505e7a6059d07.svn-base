@@ -1,0 +1,51 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.icon{
+    width: (36rem/$num);
+    height: (36rem/$num);
+    &.telephone{
+      background:url(../../../image/icon/icon_telephone.png) no-repeat;
+      background-size: cover;
+    }
+    &.password{
+      background:url(../../../image/icon/icon_password.png) no-repeat;
+      background-size: cover;
+    }
+    &.imgCode{
+      background:url(../../../image/icon/icon_img_code.png) no-repeat;
+      background-size: cover;
+    }
+    &.phoneCode{
+      background:url(../../../image/icon/icon_phone_code.png) no-repeat;
+      background-size: cover;
+    }
+    &.account{
+      background:url(../../../image/icon/icon_account.png) no-repeat;
+      background-size: cover;
+    }
+    &.download{
+      background:url(../../../image/icon/icon_download.png) no-repeat;
+      background-size: cover;
+    }
+    &.safe{
+      background:url(../../../image/icon/icon_safe.png) no-repeat;
+      background-size: cover;
+    }
+    &.set{
+      background:url(../../../image/icon/icon_set.png) no-repeat;
+      background-size: cover;
+    }
+    &.del{
+      background:url(../../../image/icon/icon_del.png) no-repeat;
+      background-size: cover;
+      position: relative;
+      top: -.8rem;
+    }
+    &.eye{
+      background:url(../../../image/icon/icon_eye2.png) no-repeat;
+      background-size: cover;
+      &.active{
+        background:url(../../../image/icon/icon_eye.png) no-repeat;
+        background-size: cover;
+      }
+    }
+}

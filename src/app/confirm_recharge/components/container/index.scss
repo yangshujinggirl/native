@@ -1,0 +1,59 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.Container {
+	
+	font-size: (28rem/$num);
+	color: $color-gray2;
+	.t1,.t2 {
+		box-flex: 1;
+		-webkit-box-flex: 1;
+	}
+	.t1 {
+		text-align: left;
+	}
+	.t2 {
+		text-align: right;
+		color: $color-black;
+		&.red {
+			color: $color-orange;
+		}
+	}
+	.bank {
+		padding:(20rem/$num);
+		font-size: (30rem/$num);
+	    display: -webkit-box;
+	    display: box;
+	    background-color: #FFF;
+	    color: $color-gray1;
+		.bankIcon {
+			width: (68rem/$num);
+			vertical-align: middle;
+		}
+		.bankName {
+			vertical-align: middle;
+			padding-left: (20rem/$num);
+		}
+		.limit {
+			font-size: (26rem/$num);
+			color: $color-gray2;
+		}
+	}
+	.list {
+		margin: (30rem/$num) 0 (68rem/$num);
+		background-color: #FFF;
+		.item {
+			padding:(36rem/$num) (20rem/$num);
+			display: -webkit-box;
+			display: box;
+			border-bottom: 1px solid $color-gray4;
+			&:nth-child(1) {
+				border-top: 1px solid $color-gray4;
+			}
+		}
+	}
+	.parent {
+		text-align: center;
+		.sure {
+			margin:0;
+		}
+	}
+}

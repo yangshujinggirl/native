@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>新手特权</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <link rel="stylesheet" href="/dist/app_newregister/app_newregister.bundle.css">
+</head>
+<body>
+  <div id="root"></div>
+  <script src="/dist/vendor.dll.js"></script>
+  <script src="/dist/commons.js"></script>
+  <script src="/dist/app_newregister/app_newregister.bundle.js"></script>
+</body>
+</html>

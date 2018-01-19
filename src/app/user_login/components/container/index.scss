@@ -1,0 +1,84 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.user-login{
+  .register-logo{
+    margin: (110rem/$num) auto;
+  }
+  .wrap-login{
+    padding: 0 (40rem/$num);
+    background-color: $color-white;
+    border-bottom: 1px solid $color-gray4;
+    border-top: 1px solid $color-gray4;
+  }
+  .wrap-input{
+    position: relative;
+    .input{
+      width: (460rem/$num);
+      height: (100rem/$num);
+      font-size: (28rem/$num);
+      color: $color-gray2;
+      text-indent: (20rem/$num);
+      margin-left: .4rem;
+      border-bottom: 1px solid $color-gray4;
+    }
+    .input-psd{
+      width: (420rem/$num);
+    }
+    .input1{
+      border-bottom: 0;
+    }
+    .code-input{
+      width: (260rem/$num);
+      border-bottom: 0;
+    }
+    .img-code{
+        width: (150rem/$num);
+        height: (66rem/$num);
+        margin: 0 0 (20rem/$num) (40rem/$num);
+    }
+    .icon-type{
+      display: inline-block;
+      position: relative;
+      top: -.8rem;
+     }
+     .icon-type-eye{
+      margin-right: (10rem/$num);
+     }
+  }
+  .button{
+    margin-top: (40rem/$num);
+  }
+  .last{
+    display: box;
+    box-orient: horizontal;
+    margin-top:(30rem/$num);
+    padding: 0 (45rem/$num);
+  }
+  .login-left{
+    font-size: (26rem/$num);
+    display: inline-block;
+    float: left;
+    a{
+      color: $color-blue;
+    }
+  }
+  .login-right{
+    font-size: (26rem/$num);
+    display: inline-block;
+    float: right;
+    color: $color-gray2;
+
+    a{
+      color: $color-blue;
+      margin-left: (10rem/$num);
+    }
+  }
+}
+  .alert-content{
+    margin-left: (25rem/$num);
+    margin-top: (25rem/$num);
+    font-size: (24rem/$num);
+    text-align: left;
+    .alert-tip{
+      color: $color-orange;
+    }
+  }

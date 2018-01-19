@@ -1,0 +1,150 @@
+@import '../../../.././utils/scss/public.scss'; //引入公共scss
+
+.wrap-share-icon {
+    display: none;
+}
+.Container {
+    padding-bottom: (200rem/$num);
+    .top {
+        width: 100%;
+        color: $color-white2;
+        // background: url(../../../image/productDetail/bg.jpg);
+        // background-size: cover;
+        background   : linear-gradient(135deg, #ff9a00,50%, #ff6600);
+        background   : -webkit-linear-gradient(135deg, #ff9a00,50%, #ff6600);
+        padding: (40rem/$num) 0 0;
+        .fr {
+            -moz-box-flex: 1;
+            -webkit-box-flex: 1;
+            line-height: 100%;
+            // .field {
+            //     color: #fff;
+            //     display: block;
+            //     font-size: (76rem/$num);
+            //     .unit {
+            //         font-style: normal;
+            //         font-size: (24rem/$num);
+            //         vertical-align: baseline;
+            //     }
+            // }
+            .bigfield {
+                color: #fff;
+                font-size: (76rem/$num);
+                line-height: 100%;
+                .unit {
+                    font-style: normal;
+                    font-size: (24rem/$num);
+                    vertical-align: baseline;
+                }
+                .tNum {
+                    vertical-align: baseline;
+                }
+            }
+        }
+        .productHead {
+            padding: 0 (60rem/$num);
+            margin: 0 auto (60rem/$num);
+            .head {
+                width: 100%;
+                font-size: (24rem/$num);
+                text-align: center;
+                position: relative;
+                &:before,
+                &:after {
+                    content: '';
+                    width: (60rem/$num);
+                    height: 1px;
+                    background-color: #fff;
+                    position: absolute;
+                    top: 50%;
+                }
+                &:before {
+                    left: 0;
+                }
+                &:after {
+                    right: 0;
+                }
+            }
+            .prop {
+                display: -webkit-box;
+                display: box;
+                padding-top: (48rem/$num);
+                font-size: (24rem/$num);
+                .field {
+                    font-weight: bold;
+                }
+                .two {
+                    text-align: right;
+                }
+            }
+        }
+        .money {
+            display: -webkit-box;
+            display: box;
+            font-size: (24rem/$num);
+            text-align: center;
+            background-color: rgba(0, 0, 0, .2);
+            background-size: cover;
+            padding: (20rem/$num) 0;
+            position: relative;
+            .fr {
+                .field {
+                    font-size: (24rem/$num);
+                }
+            }
+        }
+    }
+    .goBack {
+        font-size: (24rem/$num);
+        padding:(30rem/$num);
+        background-color: #FFF;
+        color: $color-gray2;
+        border-bottom: 1px solid $color-gray4;
+        margin-bottom: (30rem/$num);
+    }
+    .project {
+        font-size: (24rem/$num);
+        color: $color-gray2;
+        padding: 0 (30rem/$num) (30rem/$num);
+        background-color: #FFF;
+        position: relative;
+        .describe {
+            padding: (30rem/$num) 0 (30rem/$num) (50rem/$num);
+            font-size: (30rem/$num);
+            color: $color-black;
+            position: relative;
+            border-bottom: 1px solid $color-gray4;
+            &:before {
+                content: '';
+                display: block;
+                width: (33rem/$num);
+                height: (33rem/$num);
+                background: url(../../../image/icon/icon_product1.png) left center no-repeat;
+                background-size: contain;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                -webkit-transform: translateY(-50%);
+            }
+        }
+        .text {
+            padding-top: (20rem/$num);
+            line-height: (40rem/$num);
+        }
+    }
+    .parent {
+        width: 100%;
+        padding:10px;
+        background-color: #FFF;
+        text-align: center;
+        position: fixed;
+        bottom:0;
+        left:50%;
+        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        .sure {
+            margin: 0;
+        }
+    }
+}

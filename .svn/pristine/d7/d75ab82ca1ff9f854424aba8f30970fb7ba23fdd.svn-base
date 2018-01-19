@@ -1,0 +1,305 @@
+import React,{Component} from 'react';//引入react
+import './index.scss?l';//引入css文件
+import Alert from 'alert';//引入alert组件
+import Input from 'input';//引入input组件
+import InputGroup from 'inputGroup';//引入input组件
+import ImgCode from 'imgCode';//引入图形验证码组件
+import Icon from 'icon';//引入图标组件
+import Loading from 'loading';//引入loading组件
+import Logo from 'logo';//引入logo组件
+import Button from 'button';//引入button组件
+/**
+ * 引入fetch
+ */
+import 'fetchJs';
+import 'whatwg-fetch';
+import { config,strUtil,dataUtil,bussinessUtil,sessionUtil,urlUtil,localStorageUtil} from 'publicJs';
+var urlSearch=urlUtil.getFromUrl('url');//获取登录页面传递过来的url
+//组合组件
+export default class Container extends Component{
+  constructor(props){
+    super(props);
+    this.state={
+      alertText: '',//提示框文本
+      alertShow: false,//提示框默认不显示
+      alert2Show: false,//用户选择弹窗是否显示
+      telephone: '',
+      imgCode: '',
+      password: '',
+      disabled: true,//登录按钮是否可用
+      phoneIsTrue: false,//手机号码是否正确
+      imgCodeIsTrue: false, //图形验证码是否正确
+      psdIsTrue: false, //密码是否正确
+      phoneErrorText:'',//手机号码错误提示
+      imgCodeErrorText:'',//图形验证码错误提示
+      psdErrorText:'',//密码错误提示
+      isLoading: false,//是否加载中
+      guid: strUtil.getGuid(), //机器码
+      psdIsShow: false //密码是否显示
+
+    }
+  }
+  //组件完成加载
+  componentDidMount(){
+      /**
+       * 适配屏幕
+       */
+      bussinessUtil.configScreen();
+  }
+  //修改提示框内容
+  updateText=(text,show)=>{
+    this.setState({alertText: text,alertShow: show});
+    //如果show为true
+    if(show){
+      setTimeout(()=>{this.setState({alertShow: false});},config.alertTime);
+    }
+  }
+  //更新图形验证码 guid
+  updateGuid=()=>{
+    this.setState({guid: strUtil.getGuid(),imgCode: '',imgCodeIsTrue: false,disabled:true});
+  }
+
+
+  //同步用户更新的内容
+  updateValue=(text,type,isTrue,errorText)=>{
+    switch(type){
+      case '1':
+        //判断需要验证的规则是否正确
+        if(isTrue&&this.state.imgCodeIsTrue&&this.state.psdIsTrue){
+          this.setState({telephone: text,phoneIsTrue: isTrue,disabled: false,phoneErrorText:errorText});
+        }else{
+          this.setState({telephone: text,phoneIsTrue: isTrue,disabled: true,phoneErrorText:errorText});
+        }
+
+      break;
+      case '2':
+        //判断需要验证的规则是否正确
+        if(isTrue&&this.state.phoneIsTrue&&this.state.imgCodeIsTrue){
+          this.setState({password: text,psdIsTrue: isTrue,disabled: false,psdErrorText:errorText});
+        }else{
+          this.setState({password: text,psdIsTrue: isTrue,disabled: true,psdErrorText:errorText});
+        }
+
+      break;
+      case '3':
+        //判断需要验证的规则是否正确
+        if(isTrue&&this.state.phoneIsTrue&&this.state.psdIsTrue){
+          this.setState({imgCode: text,imgCodeIsTrue: isTrue,disabled: false,imgCodeErrorText:errorText});
+        }else{
+          this.setState({imgCode: text,imgCodeIsTrue: isTrue,disabled: true,imgCodeErrorText:errorText});
+        }
+      break;
+    }
+  }
+  //弹窗按钮1点击事件 暂不认证
+  btn1Click=()=>{
+    window.location.href='../home/home.html';
+  }
+
+  //弹窗按钮2点击事件 去实名
+  btn2Click=()=>{
+    window.location.href='../user_realname/user_realname.html';
+  }
+  //登录按钮点击事件
+  btnClick=()=>{
+    //判断错误提示是否都为空
+    /**
+     * 验证手机号码错误提示是否存在
+     * @param  {[type]} strUtil.isEmpty(this.state.phoneErrorText) [description]
+     * @return {[type]}                                            [description]
+     */
+    if(strUtil.isEmpty(this.state.phoneErrorText)){
+      /**
+       * 验证密码错误提示是否存在
+       * @param  {[type]} strUtil.isEmpty(this.state.phoneErrorText) [description]
+       * @return {[type]}                                            [description]
+       */
+      if(strUtil.isEmpty(this.state.psdErrorText)){
+          /**
+           * 验证图形验证码错误提示是否存在
+           * @param  {[type]} strUtil.isEmpty(this.state.phoneErrorText) [description]
+           * @return {[type]}                                            [description]
+           */
+          if(strUtil.isEmpty(this.state.imgCodeErrorText)){
+            this.setState({isLoading: true});//设置为加载中...
+            let url=`/user/login/login`;
+            let param=`machineNo=${this.state.guid}&mobileNo=${this.state.telephone}&password=${this.state.password}&pictureCode=${this.state.imgCode}`;
+            let successCall=(data)=>{
+              let sessionKey=data.data.sessionKey;
+              /**
+               * sessionKey存储到session中
+               */
+              sessionUtil.set('sessionKey',sessionKey);
+              bussinessUtil.setMobile(this.state.telephone);//存入手机号码
+              this.setState({isLoading: false});
+              /**
+               * 记录登录次数 存储到localStorage中
+               * @param  {[type]} strUtil.isEmpty(localStorageUtil.get('loginIndex')) [description]
+               * @return {[type]}                                                     [description]
+               */
+              // if(strUtil.isEmpty(localStorageUtil.get('loginIndex'))){
+              //   localStorageUtil.set('loginIndex',1);//设置登录次数为1
+              //   /**
+              //    * 获取用户信息,并且存入session
+              //    */
+              //   this.getUserInfo(sessionKey);
+              // }else{
+              //   let loginIndex=parseFloat(localStorageUtil.get('loginIndex'))+1;
+              //   localStorageUtil.set('loginIndex',loginIndex);
+              //   /**
+              //    * 获取用户信息,并且存入session
+              //    */
+              //   this.getUserInfo(sessionKey);
+              //
+              // }
+
+              this.getUserInfo(sessionKey);
+            }
+            let errorCall=(data)=>{
+              this.setState({isLoading: false});
+              this.updateGuid();//更新guid
+              let error=dataUtil.getMessage(data.resultCode);
+              this.updateText(error,true);//更新弹窗
+            }
+            let errorCall2=(e)=>{
+              this.setState({isLoading: false});
+              this.updateGuid();//更新guid
+              this.updateText(e,true);//更新弹窗
+            }
+            dataUtil.getData(url,'POST',param,successCall,errorCall,errorCall2);
+          }else{
+            this.updateText(this.state.imgCodeErrorText,true);
+          }
+      }else{
+        this.updateText(this.state.psdErrorText,true);
+      }
+    }else{
+      this.updateText(this.state.phoneErrorText,true);
+    }
+  }
+
+  /**
+   * 获取用户信息
+   */
+  getUserInfo=(sessionKey)=>{
+    let url=`/user/userInfo`;
+    let param=`sessionKey=${sessionKey}`;
+    let successCall=(data)=>{
+      bussinessUtil.updateUserInfo(data);
+      if(!bussinessUtil.isRealname()){
+        /**
+         * 认证弹窗出现
+         */
+        this.setState({alert2Show:true});
+      }else{
+        this.updateText('登录成功',true);
+        //传递过来的值为空 userName;//用户姓名
+        if(strUtil.isEmpty(urlSearch)){
+          //跳转到首页
+          window.location.href='../home/home.html';
+        }else{
+          //跳转回登录之前的页面
+          window.location.href=urlSearch;
+        }
+      }
+
+    }
+    let errorCall=(data)=>{
+      let error=dataUtil.getMessage(data.resultCode);
+      this.updateText(error,true);//更新弹窗
+    }
+    let errorCall2=(e)=>{
+      this.updateText(e,true);//更新弹窗
+    }
+    dataUtil.getData(url,'POST',param,successCall,errorCall,errorCall2);
+  }
+
+  /**
+   * 清空值
+   * @return {[type]} [description]
+   */
+  cleanValue=(e)=>{
+    switch(e.target.title){
+      case '1':
+      this.setState({telephone: '',phoneIsTrue: false,disabled:true});
+      break;
+      case '2':
+      this.setState({password: '',psdIsTrue: false,disabled:true});
+      break;
+      case '3':
+      this.setState({imgCode: '',imgCodeIsTrue: false,disabled:true});
+      break;
+    }
+  }
+  /**
+   * 显示密码的切换
+   * @return {[type]} [description]
+   */
+  togglePsd=()=>{
+    this.setState({psdIsShow: !this.state.psdIsShow});
+  }
+  render(){
+    //判断按钮是否可用
+    var dealBtn=()=>{
+      if(this.state.disabled){
+        return < Button type="disabled" btnCss='button' btnText='登录' btnClick={this.btnClick} />
+      }else{
+        return < Button type="solid" btnCss='button' btnText='登录' btnClick={this.btnClick} />
+      }
+    }
+    var btn=dealBtn();
+    return(
+       <div className="login">
+        <div className="user-login">
+          <Logo logoCss='register-logo' />
+          <div className="wrap-login">
+            <InputGroup className='wrap-input'>
+                  <Icon iconType='telephone' iconCss='icon-type' />
+                  <Input type="tel" className='input'
+                    dataType='telephone' index='1' value={this.state.telephone}
+                    updateValue={this.updateValue} />
+                  <Icon iconType='del' iconCss={`icon-type ${this.state.phoneIsTrue?'show-inline':'hide-hidden'}`}
+                  title='1' onClick={this.cleanValue} />
+            </InputGroup>
+            <InputGroup className='wrap-input'>
+                <Icon iconType='password' iconCss='icon-type' />
+                <Input type={`${this.state.psdIsShow?'text':'password'}`} className='input-psd input'
+                  dataType='password' value={this.state.password}
+                  index='2' updateValue={this.updateValue} />
+                <Icon iconType='eye' iconCss={`icon-type icon-type-eye ${this.state.psdIsShow?'active':''}`}
+                onClick={this.togglePsd} />
+                <Icon iconType='del' iconCss={`icon-type ${this.state.psdIsTrue?'show-inline':'hide-hidden'}`}
+                title='2' onClick={this.cleanValue} />
+            </InputGroup>
+            <InputGroup className='wrap-input'>
+                <Icon iconType='imgCode' iconCss='icon-type' />
+                <Input type="tel" className='input code-input'
+                  dataType='imgCode' value={this.state.imgCode}
+                  index='3' updateValue={this.updateValue} />
+                <Icon iconType='del' iconCss={`icon-type ${this.state.imgCodeIsTrue?'show-inline':'hide-hidden'}`}
+                title='3' onClick={this.cleanValue} />
+                <ImgCode className='img-code'
+                guid={this.state.guid} updateGuid={this.updateGuid} />
+            </InputGroup>
+          </div>
+          { btn }
+          <Alert text={this.state.alertText} show={this.state.alertShow} />
+
+          <Alert  type='3'
+            show={this.state.alert2Show}
+            btn1Text='取消'
+            btn2Text='去开通'
+            btn1Click={this.btn1Click}
+            btn2Click={this.btn2Click}>
+             <img src='../image/common/alertRealname_bg.png'></img>
+          </Alert>
+          <Loading loading={this.state.isLoading} />
+          <div className="last">
+             <div className="login-left"><a href="../findPassword/findPassword.html">忘记密码</a></div>
+             <div className="login-right">还没账号<a href="../user_register/user_register.html">去注册</a></div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}

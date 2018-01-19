@@ -1,0 +1,387 @@
+import React,{Component} from 'react';//引入react
+import './index.scss?l';//引入css文件
+import Alert from 'alert';//引入alert组件
+import Input from 'input';//引入input组件
+import InputGroup from 'inputGroup';//引入input组件
+import ImgCode from 'imgCode';//引入图形验证码组件
+import Icon from 'icon';//引入图标组件
+import Loading from 'loading';//引入loading组件
+import Logo from 'logo';//引入logo组件
+import Button from 'button';//引入button组件
+import PhoneCode from 'phoneCode';//引入手机验证码组件
+import Checkbox from 'checkbox';//引入checkbox组件
+/**
+ * 引入fetch
+ */
+import 'fetchJs';
+import 'whatwg-fetch';
+import { config,strUtil,dataUtil,bussinessUtil,urlUtil,sessionUtil,bigDataUtil } from 'publicJs';
+var dept=urlUtil.getSearch('dept');//渠道标识
+let activityParams = {};
+//组合组件
+export default class Container extends Component{
+  constructor(props){
+    super(props);
+    this.state={
+      alertText: '',//提示框文本
+      alertShow: false,//提示框默认不显示
+      alert2Show: false,//用户选择弹窗是否显示
+      telephone: '',
+      phoneCode: '',
+      password: '',
+      imgCode: '',
+      disabled: true,//登录按钮是否禁用
+      phoneBtnDisabled: true,//发送验证码按钮是否禁用
+      phoneIsTrue: false,//手机号码是否正确
+      imgCodeIsTrue: false,//图片验证码是否正确
+      phoneCodeIsTrue: false, //手机验证码是否正确
+      psdIsTrue: false, //密码是否正确
+      phoneErrorText:'',//手机号码错误提示
+      imgCodeErrorText:'',//图形验证码错误提示
+      phoneCodeErrorText:'',//短信验证码错误提示
+      psdErrorText:'',//密码错误提示
+      isLoading: false,//是否加载中
+      guid: strUtil.getGuid(), //机器码
+      checked: true,//协议按钮是否选中
+      psdIsShow: false //密码是否显示
+    }
+  }
+  componentWillMount() {
+    activityParams = this.getSearchTwo();
+    console.log(activityParams)
+  }
+  //组件完成加载
+  componentDidMount(){
+      /**
+       * 适配屏幕
+       */
+      bussinessUtil.configScreen();
+  }
+
+  getSearchTwo = (option) => {
+    let url = urlUtil.getUrl();
+    let arys = url.split('?'),
+        paramsd = {};
+    for(let i=0;i<arys.length;i++){
+        if(i>0){
+            let pars = arys[i].split('&');
+            for(let j=0;j<pars.length;j++){
+                paramsd[pars[j].split('=')[0]] = pars[j].split('=')[1];
+            }
+        }
+    }
+    return paramsd;
+  }
+
+  //修改提示框内容
+  updateText=(text,show)=>{
+    this.setState({alertText: text,alertShow: show});
+    //如果show为true
+    if(show){
+      setTimeout(()=>{this.setState({alertShow: false});},config.alertTime);
+    }
+  }
+  //同步用户更新的内容
+  updateValue=(text,type,isTrue,errorText)=>{
+    switch(type){
+      case '1':
+        //判断需要验证的规则是否正确
+        if(isTrue&&this.state.imgCodeIsTrue){
+          this.setState({telephone: text,phoneIsTrue: isTrue,phoneErrorText:errorText,phoneBtnDisabled: false});
+          //验证手机短信密码是否正确
+          if(this.state.phoneCodeIsTrue&&this.state.psdIsTrue){
+            this.setState({telephone: text,phoneIsTrue: isTrue,phoneErrorText:errorText,disabled: false}); 
+          }else{
+            this.setState({telephone: text,phoneIsTrue: isTrue,phoneErrorText:errorText,disabled: true}); 
+          }
+          
+        }else{
+          this.setState({telephone: text,phoneIsTrue: isTrue,phoneErrorText:errorText,disabled: true,phoneBtnDisabled: true});  
+        }
+      break;
+      case '2':
+        //判断需要验证的规则是否正确
+        if(isTrue&&this.state.phoneIsTrue){
+          this.setState({imgCode: text,imgCodeIsTrue: isTrue,imgCodeErrorText: errorText,phoneBtnDisabled: false}); 
+          //验证手机短信密码是否正确
+          if(this.state.phoneCodeIsTrue&&this.state.psdIsTrue){
+            this.setState({imgCode: text,imgCodeIsTrue: isTrue,imgCodeErrorText: errorText,disabled: false}); 
+          }else{
+            this.setState({imgCode: text,imgCodeIsTrue: isTrue,imgCodeErrorText: errorText,disabled: true}); 
+          } 
+        }else{
+          this.setState({imgCode: text,imgCodeIsTrue: isTrue,disabled: true,imgCodeErrorText: errorText,phoneBtnDisabled: true});
+        }  
+      break;
+      case '3':
+        //判断需要验证的规则是否正确
+        if(isTrue&&this.state.phoneIsTrue&&this.state.psdIsTrue&&this.state.imgCodeIsTrue){
+          this.setState({phoneCode: text,phoneCodeIsTrue: isTrue,phoneCodeErrorText: errorText,disabled: false}); 
+        }else{
+          this.setState({phoneCode: text,phoneCodeIsTrue: isTrue,phoneCodeErrorText: errorText,disabled: true});
+        }
+      break;
+      case '4':
+        //判断需要验证的规则是否正确
+        if(isTrue&&this.state.phoneIsTrue&&this.state.phoneCodeIsTrue&&this.state.imgCodeIsTrue){
+          this.setState({password: text,psdIsTrue: isTrue,psdErrorText: errorText,disabled: false}); 
+        }else{
+          this.setState({password: text,psdIsTrue: isTrue,psdErrorText: errorText,disabled: true});
+        }  
+      break;
+    }
+  }
+
+  //更新获取验证码的disabled状态
+  updatePhoneState=(state)=>{
+    this.setState({phoneBtnDisabled: state});
+  }
+
+  //更新图形验证码 guid
+  updateGuid=(isClean=true)=>{
+    if(isClean){
+      this.setState({guid: strUtil.getGuid(),cleanCode: true,imgCode: '',imgCodeIsTrue: false,disabled:true});
+    }else{
+      this.setState({guid: strUtil.getGuid()});
+    }    
+  }
+
+  //弹窗按钮1点击事件 暂不认证
+  btn1Click=()=>{
+    window.location.href='../home/home.html';
+  }
+
+  //弹窗按钮2点击事件 去实名
+  btn2Click=()=>{
+    window.location.href='../user_realname/user_realname.html';
+  }
+
+  //协议点击事件
+  changeCheck=()=>{
+    if(!this.state.checked){
+      if(this.state.psdIsTrue&&this.state.phoneIsTrue&&this.state.phoneCodeIsTrue&&this.state.imgCodeIsTrue){
+        this.setState({disabled: false,checked: !this.state.checked}); 
+      }else{
+        this.setState({checked: !this.state.checked}); 
+      }
+      
+    }else{
+      this.setState({disabled: true,checked: !this.state.checked}); 
+    } 
+  }
+
+  //提交注册
+  submit = () =>{
+    //判断错误提示是否都为空
+    /**
+     * 验证手机号码错误提示是否存在
+     * @param  {[type]} strUtil.isEmpty(this.state.phoneErrorText) [description]
+     * @return {[type]}                                            [description]
+     */
+    if(strUtil.isEmpty(this.state.phoneErrorText)){
+      /**
+       * 验证图形验证码错误提示是否存在
+       * @param  {[type]} strUtil.isEmpty(this.state.phoneErrorText) [description]
+       * @return {[type]}                                            [description]
+       */
+      if(strUtil.isEmpty(this.state.imgCodeErrorText)){
+        /**
+         * 验证短信验证码错误提示是否存在
+         * @param  {[type]} strUtil.isEmpty(this.state.phoneErrorText) [description]
+         * @return {[type]}                                            [description]
+         */
+        if(strUtil.isEmpty(this.state.phoneCodeErrorText)){
+          /**
+           * 验证密码错误提示是否存在
+           * @param  {[type]} strUtil.isEmpty(this.state.phoneErrorText) [description]
+           * @return {[type]}                                            [description]
+           */
+          if(strUtil.isEmpty(this.state.psdErrorText)){
+            this.setState({isLoading: true});//设置为加载中...
+            let url=`/user/register/registerH5User`;
+            let param=`readAndAgree=1&dept=${dept}&mobileNo=${this.state.telephone}&password=${this.state.password}&mobileCode=${this.state.phoneCode}`;
+            let successCall=(data)=>{  
+              bussinessUtil.setMobile(this.state.telephone);//存入手机号码
+              let bigData={
+                "index": '1',
+                "name": 'mobile',
+                "value": this.state.telephone
+              }
+              //传入大数据需要的参数
+              bigDataUtil.setBigDataNeedParam(bigData);
+              //传入大数据标识
+              bigDataUtil.setBigDataUserId(this.state.telephone);
+              //传入大数据事件
+              bigDataUtil.setBigDataEvent(config.bigDataEvent.register);
+              /**
+               * sessionKey存储到session中
+               */
+              sessionUtil.set('sessionKey',data.data.sessionKey);
+              this.getUserInfo(data.data.sessionKey);
+                
+            }
+            let errorCall=(data)=>{
+              this.setState({isLoading: false});
+              this.updateGuid();//更新guid
+              let error=dataUtil.getMessage(data.resultCode);
+              this.updateText(error,true);//更新弹窗
+            }
+            let errorCall2=(e)=>{
+              this.setState({isLoading: false});
+              this.updateGuid();//更新guid
+              this.updateText(e,true);//更新弹窗
+            }
+            dataUtil.getData(url,'POST',param,successCall,errorCall,errorCall2);
+          }else{
+            this.updateText(this.state.psdErrorText,true); 
+          }
+        }else{
+          this.updateText(this.state.phoneCodeErrorText,true); 
+        }
+      }else{
+        this.updateText(this.state.imgCodeErrorText,true); 
+      }  
+    }else{
+      this.updateText(this.state.phoneErrorText,true);
+    }
+  }
+  /**
+   * 获取用户信息
+   */
+  getUserInfo=(sessionKey)=>{
+    let url=`/user/userInfo`;
+    let param=`sessionKey=${sessionKey}`;
+    let successCall=(data)=>{
+      bussinessUtil.updateUserInfo(data);
+      // console.log(activityParams)
+      if(activityParams.type==2) {                 
+        window.location.href = activityParams.url;
+      } else {
+        this.setState({isLoading: false,alert2Show: true}); 
+      }
+      // this.setState({isLoading: false,alert2Show: true}); 
+    }
+    let errorCall=(data)=>{
+      let error=dataUtil.getMessage(data.resultCode);
+      this.updateText(error,true);//更新弹窗
+    }
+    let errorCall2=(e)=>{
+      this.updateText(e,true);//更新弹窗
+    }
+    dataUtil.getData(url,'POST',param,successCall,errorCall,errorCall2);
+  }
+  /**
+   * 清空值
+   * @return {[type]} [description]
+   */
+  cleanValue=(e)=>{
+    switch(e.target.title){
+      case '1':
+      this.setState({telephone: '',phoneIsTrue: false,disabled:true,phoneBtnDisabled:true});
+      break;
+      case '2':
+      this.setState({imgCode: '',imgCodeIsTrue: false,disabled:true,phoneBtnDisabled:true});
+      break;
+      case '3':
+      this.setState({phoneCode: '',phoneCodeIsTrue: false,disabled:true});
+      break;
+      case '4':
+      this.setState({password: '',psdIsTrue: false,disabled:true});
+      break;
+    }
+  }
+  /**
+   * 显示密码的切换
+   * @return {[type]} [description]
+   */
+  togglePsd=()=>{
+    this.setState({psdIsShow: !this.state.psdIsShow});
+  }
+  render(){
+    //判断按钮是否可用
+    var dealBtn=()=>{
+      if(this.state.disabled){
+        return < Button type="disabled" btnCss='button-register' btnText='完成注册' btnClick={this.submit} />
+      }else{
+        return < Button type="solid" btnCss='button-register' btnText='完成注册' btnClick={this.submit} />
+      }
+    }
+    var btn=dealBtn();
+    //根据状态显示发送验证码按钮
+    var phone;
+    let dealPhone=()=>{
+      if(this.state.phoneBtnDisabled){
+         phone=<PhoneCode className='verificationcode disabled' disabled
+         guid={this.state.guid} telephone={this.state.telephone} 
+         updateGuid={this.updateGuid} updateText={this.updateText} 
+         imgCode={this.state.imgCode} updatePhoneState={this.updatePhoneState}  />
+      }else{
+        phone=<PhoneCode className='verificationcode' 
+         guid={this.state.guid} telephone={this.state.telephone}  
+         updateGuid={this.updateGuid}  updateText={this.updateText}
+         imgCode={this.state.imgCode} updatePhoneState={this.updatePhoneState}  />
+      }
+    }
+    dealPhone();
+    return(
+      <div className="register">
+        <div className="user-register">
+          <Logo logoCss='register-logo' />
+          <div className="wrap-register">
+            <InputGroup className='wrap-input'>
+                <Icon iconType='telephone' iconCss='icon-type' />
+                <Input type="tel" className='input' 
+                  dataType='telephone' index='1' value={this.state.telephone}
+                  updateValue={this.updateValue} placeholder="推荐使用银行预留手机号码" />
+                <Icon iconType='del' iconCss={`icon-type ${this.state.phoneIsTrue?'show-inline':'hide-hidden'}`} 
+                title='1' onClick={this.cleanValue} />
+            </InputGroup>
+            <InputGroup className='wrap-input'>
+                <Icon iconType='imgCode' iconCss='icon-type' />
+                <Input type="tel" className='input code-input' 
+                  dataType='imgCode' value={this.state.imgCode}
+                  index='2' updateValue={this.updateValue} />
+                <Icon iconType='del' iconCss={`icon-type ${this.state.imgCodeIsTrue?'show-inline':'hide-hidden'}`} 
+                title='2' onClick={this.cleanValue} />
+                <ImgCode className='img-code' 
+                guid={this.state.guid} updateGuid={this.updateGuid} />
+            </InputGroup>
+            <InputGroup className='wrap-input'>
+                <Icon iconType='phoneCode' iconCss='icon-type' />
+                <Input type="tel" className='input code-input' 
+                  dataType='phoneCode' value={this.state.phoneCode}
+                  index='3' updateValue={this.updateValue} />
+                  <Icon iconType='del' iconCss={`icon-type ${this.state.phoneCodeIsTrue?'show-inline':'hide-hidden'}`} 
+                title='3' onClick={this.cleanValue} />
+                { phone }
+            </InputGroup>
+            <InputGroup className='wrap-input'>
+                <Icon iconType='password' iconCss='icon-type' />
+                <Input type={`${this.state.psdIsShow?'text':'password'}`} className='input-psd input' 
+                  dataType='password' value={this.state.password}
+                  index='4' updateValue={this.updateValue} />
+                <Icon iconType='eye' iconCss={`icon-type icon-type-eye ${this.state.psdIsShow?'active':''}`} 
+                onClick={this.togglePsd} />
+                <Icon iconType='del' iconCss={`icon-type ${this.state.psdIsTrue?'show-inline':'hide-hidden'}`} 
+                title='4' onClick={this.cleanValue} />
+            </InputGroup>
+          </div>
+          { btn }
+          <Alert text={this.state.alertText} show={this.state.alertShow} />
+          <Alert  type='2'  show={this.state.alert2Show}
+          title='恭喜您，注册成功！'  btn1Text='暂不认证' btn2Text='立即认证'
+           btn1Click={this.btn1Click}  btn2Click={this.btn2Click} btn1Css='button1' btn2Css='button2'>
+           <p className='alert-content'>10元返现和10000元体验金已发送到您的账户！为保障您的资金安全，请先完成第三方资金托管账户开通认证及业务授权。</p>
+           <p className='alert-content'><span>完成开户认证可额外获得</span><span className='alert-tip'>20</span><span>元返现哦！</span></p>
+          </Alert>
+          <Loading loading={this.state.isLoading} />
+          <div className="register-login">已有账号<a href="../user_login/user_login.html">去登录</a></div>
+          <Checkbox checked={this.state.checked} parentCss='accept' changeCheck={this.changeCheck} >
+            <span className='agree'>我已阅读并同意</span>
+            <a href='https://www.lingtouniao.com/v3/h5/accept-register.html' className='protocol'>《在线服务协议》</a>
+          </Checkbox>
+        </div>
+      </div>
+    )
+  }
+}

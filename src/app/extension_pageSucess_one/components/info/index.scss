@@ -1,0 +1,52 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+
+.info {
+  width:(568rem/$num);
+  height:(306rem/$num);
+  padding: (40rem/$num) (50rem/$num) 0;
+  box-sizing:border-box;
+  margin:(50rem/$num) auto 0;
+  position:relative;
+  .line {
+      padding:0 (20rem/$num);
+      font-size: (30rem/$num);
+      font-weight: bold;
+      background-color: #ffffef;
+      position:relative;
+      text-align: center;
+    &:before, &:after{
+      content:'';
+      width:(100rem/$num);
+      height: (1rem/$num);
+      background-color: #eed4be;
+      position:absolute;
+      top:50%;
+    }
+    &:before {
+      left:0;
+    }
+    &:after {
+      right: 0;
+    }
+  }
+  .yes {
+    font-size: (24rem/$num);
+    margin-top: (10rem/$num);
+    text-align: center;
+  }
+}
+
+.successInfo {
+   background: url(../../../image/extension/extension_01.png) no-repeat center;
+  background-size: contain;
+  .line,.yes {
+    color: #f94b53;
+  }
+}
+.failsInfo {
+  background: url(../../../image/extension/extension_02.png) no-repeat center;
+  background-size: contain;
+  .line,.yes {
+    color: #666;
+  }
+}

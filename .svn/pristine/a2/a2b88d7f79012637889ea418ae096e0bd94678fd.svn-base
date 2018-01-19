@@ -1,0 +1,7 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.logo{
+	width: (266rem/$num);
+	height: (106rem/$num);
+	background: url(../../../image/icon/logo.png);
+	background-size: cover;
+}

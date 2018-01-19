@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>七夕活动注册页</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="/dist/activity_lover_register/activity_lover_register.bundle.css">
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="/dist/vendor.dll.js"></script>
+    <script src="/dist/commons.js"></script>
+    <script src="/dist/activity_lover_register/activity_lover_register.bundle.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1100 @@
+"use strict";
+let webpack = require('webpack');
+let path = require('path');
+let fs = require('fs');
+let ExtractTextPlugin = require("extract-text-webpack-plugin");//独立拆分css
+let autoprefixer = require('autoprefixer');//添加浏览器前缀
+var HtmlWebpackPlugin = require('html-webpack-plugin');//动态生成html
+var CopyWebpackPlugin = require('copy-webpack-plugin');//复制文件
+/** 入口配置
+ * @type {Object}
+ */
+var entry={
+    vendor: ['./src/utils/js/public.js'],
+    /**
+     * 首页入口文件
+     * @type {String}
+     */
+    home: './src/app/home/app.js',
+    /**
+     * 案例页入口文件
+     * @type {String}
+     */
+    example: './src/app/example/app.js',
+    /**
+     * 长版注册页1入口文件
+     * @type {String}
+     */
+    extension_page_one: './src/app/extension_page_one/app.js',
+    /**
+     * 长版注册页1入口文件组件版
+     * @type {String}
+     */
+    extension_page_on: './src/app/extension_page_on/app.js',
+    /**
+     * 长版注册页2入口文件组件版
+     * @type {String}
+     */
+    extension_page_tw: './src/app/extension_page_tw/app.js',
+    /**
+     * 长版注册成功页1入口文件
+     * @type {String}
+     */
+    extension_pageSucess_one: './src/app/extension_pageSucess_one/app.js',
+    /**
+     * 长版已注册注册页1入口文件
+     * @type {String}
+     */
+    extension_pagefail_one: './src/app/extension_pagefail_one/app.js',
+     /**
+     * 长版注册页2入口文件
+     * @type {String}
+     */
+    extension_page_two: './src/app/extension_page_two/app.js',
+    /**
+     * 长版注册成功页2入口文件
+     * @type {String}
+     */
+    extension_pageSucess_two: './src/app/extension_pageSucess_two/app.js',
+    /**
+     * 长版已注册注册页2入口文件
+     * @type {String}
+     */
+    extension_pagefail_two: './src/app/extension_pagefail_two/app.js',
+    /**
+     * 新手指引
+     * @type {String}
+     */
+    app_newregister: './src/app/app_newregister/app.js',
+    /**
+     * 购买记录
+     * @type {String}
+     */
+    account_history: './src/app/account_history/app.js',
+    /**
+     * 我的投资
+     * @type {String}
+     */
+    account_invest: './src/app/account_invest/app.js',
+    /**
+     * 充值成功
+     * @type {String}
+     */
+    account_recharge_success: './src/app/account_recharge_success/app.js',
+    /**
+     * 理财金券
+     * @type {String}
+     */
+    account_security: './src/app/account_security/app.js',
+    /**
+     * 开通免密成功
+     * @type {String}
+     */
+    account_switch_success: './src/app/account_switch_success/app.js',
+    /**
+     * 解除免密成功
+     * @type {String}
+     */
+    account_switch_fail: './src/app/account_switch_fail/app.js',
+    /**
+     * 我的账户
+     * @type {String}
+     */
+    account_viewall: './src/app/account_viewall/app.js',
+    /**
+     * 提现成功
+     * @type {String}
+     */
+    account_withDraw_success: './src/app/account_withDraw_success/app.js',
+    /**
+     * 下载APP
+     * @type {String}
+     */
+    download_app: './src/app/download_app/app.js',
+    /**
+     * 安全保障
+     * @type {String}
+     */
+    set_safe: './src/app/set_safe/app.js',
+    /**
+     * 绑卡
+     * @type {String}
+     */
+    user_card: './src/app/user_card/app.js',
+    /**
+     * 绑卡成功
+     * @type {String}
+     */
+    user_card_success: './src/app/user_card_success/app.js',
+    /**
+     * 设置
+     * @type {String}
+     */
+    user_install: './src/app/user_install/app.js',
+    /**
+     * 登录
+     * @type {String}
+     */
+    user_login: './src/app/user_login/app.js',
+    /**
+     * 实名
+     * @type {String}
+     */
+    user_realname: './src/app/user_realname/app.js',
+    /**
+     * 注册
+     * @type {String}
+     */
+    user_register: './src/app/user_register/app.js',
+    /**
+     * 实名成功
+     * @type {String}
+     */
+    user_realname_success: './src/app/user_realname_success/app.js',
+    /**
+     * 用户服务协义
+     * @type {String}
+     */
+    serveProtocol: './src/app/serveProtocol/app.js',
+    /**
+     * 合伙人
+     * @type {String}
+     */
+    app_partner: './src/app/app_partner/app.js',
+    /**
+     * 微信H5首页
+     * @type {String}
+     */
+    home: './src/app/home/app.js',
+    /**
+     * 微信H5产品详情
+     * @type {String}
+     */
+    productDetail: './src/app/productDetail/app.js',
+    /**
+     * 微信H5投资页面
+     * @type {String}
+     */
+    invest: './src/app/invest/app.js',
+    /**
+     * 微信H5确认投资
+     * @type {String}
+     */
+    confirm_invest: './src/app/confirm_invest/app.js',
+    /**
+     * 微信H5充值页面
+     * @type {String}
+     */
+    recharge: './src/app/recharge/app.js',
+    /**
+     * 微信H5确认充值页面
+     * @type {String}
+     */
+    confirm_recharge: './src/app/confirm_recharge/app.js',
+    /**
+     * 微信H5提现页面
+     * @type {String}
+     */
+    withdraw: './src/app/withdraw/app.js',
+    /**
+     * 微信H5提现页面
+     * @type {String}
+     */
+    confirm_withdraw: './src/app/confirm_withdraw/app.js',
+    /**
+     * 微信H5找回密码页面
+     * @type {String}
+     */
+    findPassword:'./src/app/findPassword/app.js',
+
+    /**
+     * 微信H5找回密码页面2
+     * @type {String}
+     */
+    findPassword2:'./src/app/findPassword2/app.js',
+    /**
+     * 微信H5体验标购买页面
+     * @type {String}
+     */
+    experience:'./src/app/experience/app.js',
+    /**
+     * 微信H5体验标确认购买页面
+     * @type {String}
+     */
+    confirm_experience:'./src/app/confirm_experience/app.js',
+    /**
+     * 情人节活动页面
+     * @type {String}
+     */
+     activity_lover_guide:'./src/app/activity_lover_guide/app.js',
+     /**
+      * 情人节活动页面
+      * @type {String}
+      */
+     activity_lover_info:'./src/app/activity_lover_info/app.js',
+     /**
+      * 情人节活动页面
+      * @type {String}
+      */
+     activity_lover_register:'./src/app/activity_lover_register/app.js',
+     /**
+      * 情人节活动页面
+      * @type {String}
+      */
+     activity_lover_register_success:'./src/app/activity_lover_register_success/app.js',
+     /**
+      * 情人节活动页面
+      * @type {String}
+      */
+     activity_lover_share:'./src/app/activity_lover_share/app.js',
+
+
+};
+
+module.exports = {
+    /*
+    * babel参数
+    * */
+    babelQuery: {
+        presets: ['es2015', 'react', 'stage-0'],
+        plugins: ['transform-runtime', 'add-module-exports', 'typecheck', "transform-decorators-legacy"],
+        cacheDirectory: true
+    },
+    /**
+     * 入口文件
+     * @type {Object}
+     */
+    entry: entry,
+    output: {
+        path: path.join(__dirname, 'dist'),
+        publicPath: '.././',
+        filename: '[name]/[name].bundle.js'
+    },
+    module: {
+        loaders: [{
+                test: /\.js$/,
+                loader: 'babel?presets[]=react,presets[]=es2015,presets[]=stage-0',
+                exclude: /node_modules/,
+                query: this.babelQuery
+            },
+            {
+                test: /\.scss\?l$/,
+                loader: ExtractTextPlugin.extract('css?sourceMap!sass?sourceMap')
+            },
+            {
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract('css?modules&importLoaders=1&localIdentName=[path][name]_[local]_[hash:base64:5]&sourceMap!postcss?sourceMap!sass?sourceMap')
+            }, {
+                test: /\.(png|jpg)$/,
+                loader: "url?name=[path][name].[ext]&limit=8192"
+            }]
+    },
+    postcss: function () {
+        return [autoprefixer];
+    },
+    resolve: {
+        extensions: ['', '.js', '.scss','css','png','jpg','jpeg'],
+        alias: { //模块别名定义，方便后续直接引用别名，无须多写长长的地址
+            /**
+             * 公共 banner 组件
+             */
+            'banner': path.join(__dirname, './src/app/common/components/banner/index.js'),
+            /**
+             * 公共 alert 组件
+             */
+            'alert': path.join(__dirname, './src/app/common/components/alert/index.js'),
+            /**
+             * 公共 登录超时 组件
+             */
+            'loginOver': path.join(__dirname, './src/app/common/components/loginOver/index.js'),
+            /**
+             * 公共 input 组件
+             */
+            'input': path.join(__dirname, './src/app/common/components/input/index.js'),
+            /**
+             * 公共 inputGroup 组件
+             */
+            'inputGroup': path.join(__dirname, './src/app/common/components/inputGroup/index.js'),
+            /**
+             * 公共 imgCode 组件
+             */
+            'imgCode': path.join(__dirname, './src/app/common/components/imgCode/index.js'),
+            /**
+             * 公共 phoneCode 组件
+             */
+            'phoneCode': path.join(__dirname, './src/app/common/components/phoneCode/index.js'),
+            /**
+             * 公共 Loading 组件
+             */
+            'loading': path.join(__dirname, './src/app/common/components/loading/index.js'),
+            /**
+             * 公共 TextArea 组件
+             */
+            'textarea': path.join(__dirname, './src/app/common/components/textarea/index.js'),
+            /**
+             * 公共 checkbox 组件
+             */
+            'checkbox': path.join(__dirname, './src/app/common/components/checkbox/index.js'),
+            /**
+             * 公共 icon 组件
+             */
+            'icon': path.join(__dirname, './src/app/common/components/icon/index.js'),
+
+            /**
+             * 公共 button 组件
+             */
+            'button': path.join(__dirname, './src/app/common/components/button/index.js'),
+            /**
+             * 公共 logo 组件
+             */
+            'logo': path.join(__dirname, './src/app/common/components/logo/index.js'),
+            /**
+             * 公共 selct 组件
+             */
+            'select': path.join(__dirname, './src/app/common/components/select/index.js'),
+            /**
+             * 公共 footer 组件
+             */
+            'footer': path.join(__dirname, './src/app/common/components/footer/index.js'),
+            /**
+             * 公共 lazyLoad 组件
+             */
+            'lazyLoad': path.join(__dirname, './src/app/common/components/lazyLoad/index.js'),
+            /**
+             * 公共 scrollLoad 组件
+             */
+            'scrollLoad': path.join(__dirname, './src/app/common/components/scrollLoad/index.js'),
+            /**
+             * 公共 switch 组件
+             */
+            'switch': path.join(__dirname, './src/app/common/components/switch/index.js'),
+            /**
+             * 公共 noInfo 组件
+             */
+            'noInfo': path.join(__dirname, './src/app/common/components/noInfo/index.js'),
+            /**
+             * 公共 public.js
+             */
+            'publicJs': path.join(__dirname, './src/utils/js/public.js'),
+
+
+            /**
+             * 公共 fetch.js
+             */
+            'fetchJs': path.join(__dirname, './node_modules/es6-promise/dist/es6-promise.min.js'),
+
+            /**
+             * 公共 public.scss
+             */
+            'publicCss': path.join(__dirname, './src/utils/scss/public.scss')
+            }
+    },
+    plugins: [
+        /**
+         * 生成html
+         */
+        /**
+         * 首页
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: 'Hello World app',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './home/home.html',
+            template:  './src/app/common/common.html',
+            //chunks这个参数告诉插件要引用entry里面的哪几个入口
+            chunks: ['vendor','home'],
+            //要把script插入到标签里
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 案例页
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: 'Hello Mobile app',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './example/example.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','example'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 长版注册页1
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '领投鸟官网平台_新手特权',
+            keywords: '领投鸟、领投鸟理财、领投鸟官网平台、领头鸟、P2P网贷、投资理财、短期理财、互联网金融、不动产理财、房贷、赎楼、资金安全',
+            description: '领投鸟官网平台_专注于不动产理财的稳健灵活高收益互联网金融平台，平台提供网络贷款，投资理财，赎楼业务，小额贷款，短期贷款，互联网理财、P2P网贷',
+            filename: './extension_page_one/extension_page_one.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','extension_page_one'],
+            shareIcon: '.././image/icon/market.jpg',
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 长版注册页1组件版
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '领投鸟官网平台_新手特权',
+            keywords: '领投鸟、领投鸟理财、领投鸟官网平台、领头鸟、P2P网贷、投资理财、短期理财、互联网金融、不动产理财、房贷、赎楼、资金安全',
+            description: '领投鸟官网平台_专注于不动产理财的稳健灵活高收益互联网金融平台，平台提供网络贷款，投资理财，赎楼业务，小额贷款，短期贷款，互联网理财、P2P网贷',
+            filename: './extension_page_on/extension_page_on.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','extension_page_on'],
+            shareIcon: '.././image/icon/market.jpg',
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 长版注册页2组件版
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '领投鸟官网平台_新手特权',
+            keywords: '领投鸟、领投鸟理财、领投鸟官网平台、领头鸟、P2P网贷、投资理财、短期理财、互联网金融、不动产理财、房贷、赎楼、资金安全',
+            description: '领投鸟官网平台_专注于不动产理财的稳健灵活高收益互联网金融平台，平台提供网络贷款，投资理财，赎楼业务，小额贷款，短期贷款，互联网理财、P2P网贷',
+            filename: './extension_page_tw/extension_page_tw.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','extension_page_tw'],
+            shareIcon: '.././image/icon/market.jpg',
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 长版注册成功页1
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '领投鸟官网平台_新手特权',
+            keywords: '领投鸟、领投鸟理财、领投鸟官网平台、领头鸟、P2P网贷、投资理财、短期理财、互联网金融、不动产理财、房贷、赎楼、资金安全',
+            description: '领投鸟官网平台_专注于不动产理财的稳健灵活高收益互联网金融平台，平台提供网络贷款，投资理财，赎楼业务，小额贷款，短期贷款，互联网理财、P2P网贷',
+            filename: './extension_pageSucess_one/extension_pageSucess_one.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','extension_pageSucess_one'],
+            shareIcon: '.././image/icon/market.jpg',
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 长版已注册页1
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '领投鸟官网平台_新手特权',
+            keywords: '领投鸟、领投鸟理财、领投鸟官网平台、领头鸟、P2P网贷、投资理财、短期理财、互联网金融、不动产理财、房贷、赎楼、资金安全',
+            description: '领投鸟官网平台_专注于不动产理财的稳健灵活高收益互联网金融平台，平台提供网络贷款，投资理财，赎楼业务，小额贷款，短期贷款，互联网理财、P2P网贷',
+            filename: './extension_pagefail_one/extension_pagefail_one.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','extension_pagefail_one'],
+            shareIcon: '.././image/icon/market.jpg',
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 长版注册页2
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '领投鸟官网平台_新手特权',
+            keywords: '领投鸟、领投鸟理财、领投鸟官网平台、领头鸟、P2P网贷、投资理财、短期理财、互联网金融、不动产理财、房贷、赎楼、资金安全',
+            description: '领投鸟官网平台_专注于不动产理财的稳健灵活高收益互联网金融平台，平台提供网络贷款，投资理财，赎楼业务，小额贷款，短期贷款，互联网理财、P2P网贷',
+            filename: './extension_page_two/extension_page_two.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','extension_page_two'],
+            shareIcon: '.././image/icon/market.jpg',
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 长版注册成功页2
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '领投鸟官网平台_新手特权',
+            keywords: '领投鸟、领投鸟理财、领投鸟官网平台、领头鸟、P2P网贷、投资理财、短期理财、互联网金融、不动产理财、房贷、赎楼、资金安全',
+            description: '领投鸟官网平台_专注于不动产理财的稳健灵活高收益互联网金融平台，平台提供网络贷款，投资理财，赎楼业务，小额贷款，短期贷款，互联网理财、P2P网贷',
+            filename: './extension_pageSucess_two/extension_pageSucess_two.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','extension_pageSucess_two'],
+            shareIcon: '.././image/icon/market.jpg',
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 用户服务协议
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '用户服务协议',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './serveProtocol/serveProtocol.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','serveProtocol'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 合伙人
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '合伙人特权',
+            keywords: '我的页面关键字',
+            description: '成为领投鸟理财合伙人，可享受推荐奖励，平台分润，以及徽章特权',
+            filename: './app_partner/app_partner.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','app_partner'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 长版已注册页2
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '领投鸟官网平台_新手特权',
+            keywords: '领投鸟、领投鸟理财、领投鸟官网平台、领头鸟、P2P网贷、投资理财、短期理财、互联网金融、不动产理财、房贷、赎楼、资金安全',
+            description: '领投鸟官网平台_专注于不动产理财的稳健灵活高收益互联网金融平台，平台提供网络贷款，投资理财，赎楼业务，小额贷款，短期贷款，互联网理财、P2P网贷',
+            filename: './extension_pagefail_two/extension_pagefail_two.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','extension_pagefail_two'],
+            shareIcon: '.././image/icon/market.jpg',
+            inject: true,
+            hash: true
+        }),
+         /**
+         * 新手指引
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '新手特权',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './app_newregister/app_newregister.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','app_newregister'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 购买记录
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '购买记录',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './account_history/account_history.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','account_history'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 我的投资
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '我的投资',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './account_invest/account_invest.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','account_invest'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 充值成功
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '充值成功',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './account_recharge_success/account_recharge_success.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','account_recharge_success'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 理财金券
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '理财金券',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './account_security/account_security.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','account_security'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 免密充值开通成功
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '免密协议开通成功',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './account_switch_success/account_switch_success.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','account_switch_success'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 免密充值解除成功
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '免密充值解除成功',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './account_switch_fail/account_switch_fail.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','account_switch_fail'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 我的账户
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '我的账户',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './account_viewall/account_viewall.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','account_viewall'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 提现成功
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '提现成功',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './account_withDraw_success/account_withDraw_success.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','account_withDraw_success'],
+            inject: true,
+            hash: true
+        }),
+
+        /**
+         * 提现页面
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '提现页面',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './withdraw/withdraw.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','withdraw'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 下载APP
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '下载APP',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './download_app/download_app.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','download_app'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 安全保障
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '安全保障',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './set_safe/set_safe.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','set_safe'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 绑卡
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '绑卡',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './user_card/user_card.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','user_card'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 绑卡成功
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '绑卡成功',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './user_card_success/user_card_success.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','user_card_success'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 设置
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '设置',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './user_install/user_install.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','user_install'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 登录
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '登录',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './user_login/user_login.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','user_login'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 实名
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '实名',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './user_realname/user_realname.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','user_realname'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 实名成功
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '实名成功',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './user_realname_success/user_realname_success.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','user_realname_success'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 注册
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '注册',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './user_register/user_register.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','user_register'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 微信H5首页
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '首页',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './home/home.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','home'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 微信H5产品详情页
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '产品详情',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './productDetail/productDetail.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','productDetail'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 微信H5投资
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '投资',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './invest/invest.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','invest'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 微信H5确认投资
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '确认投资',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './confirm_invest/confirm_invest.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','confirm_invest'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 微信H5充值
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '充值',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './recharge/recharge.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','recharge'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 微信H5确认充值
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '确认充值',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './confirm_recharge/confirm_recharge.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','confirm_recharge'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 微信H5确认提现
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '确认提现',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './confirm_withdraw/confirm_withdraw.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','confirm_withdraw'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 微信H5找回密码
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '找回密码',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './findPassword/findPassword.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','findPassword'],
+            inject: true,
+            hash: true
+        }),
+
+        /**
+         * 微信H5找回密码2
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '找回密码',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './findPassword2/findPassword2.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','findPassword2'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 微信H5体验标购买页面
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '体验标详情',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './experience/experience.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','experience'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 微信H5体验标确认购买页面
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: '确认购买',
+            keywords: '我的页面关键字',
+            description: '我的页面描述',
+            filename: './confirm_experience/confirm_experience.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','confirm_experience'],
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 情人节活动页面
+         * @type {String}
+         */
+        new HtmlWebpackPlugin({
+            title: 'Hey，玫瑰里有一份你的告白',
+            keywords: '高调说爱',
+            description: '在玫瑰里藏一句你的告白，TA能听到吗？',
+            filename: './activity_lover_guide/activity_lover_guide.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','activity_lover_guide'],
+            inject: true,
+            hash: true
+        }),
+        new HtmlWebpackPlugin({
+            title: 'Hey，玫瑰里有一份你的告白',
+            keywords: '高调说爱',
+            description: '在玫瑰里藏一句你的告白，TA能听到吗？',
+            filename: './activity_lover_info/activity_lover_info.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','activity_lover_info'],
+            inject: true,
+            hash: true
+        }),
+        new HtmlWebpackPlugin({
+            title: 'Hey，玫瑰里有一份你的告白',
+            keywords: '高调说爱',
+            description: '在玫瑰里藏一句你的告白，TA能听到吗？',
+            filename: './activity_lover_register/activity_lover_register.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','activity_lover_register'],
+            inject: true,
+            hash: true
+        }),
+        new HtmlWebpackPlugin({
+            title: 'Hey，玫瑰里有一份你的告白',
+            keywords: '高调说爱',
+            description: '在玫瑰里藏一句你的告白，TA能听到吗？',
+            filename: './activity_lover_register_success/activity_lover_register_success.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','activity_lover_register_success'],
+            inject: true,
+            hash: true
+        }),
+        new HtmlWebpackPlugin({
+            title: 'Hey，玫瑰里有一份你的告白',
+            keywords: '高调说爱',
+            description: '在玫瑰里藏一句你的告白，TA能听到吗？',
+            filename: './activity_lover_share/activity_lover_share.html',
+            template:  './src/app/common/common.html',
+            chunks: ['vendor','activity_lover_share'],
+            shareIcon: '.././image/icon/lover.jpg',
+            inject: true,
+            hash: true
+        }),
+        /**
+         * 查找相等或近似的模块，避免在最终生成的文件中出现重复的模块
+         */
+        new webpack.DefinePlugin({
+          'process.env': {
+            'NODE_ENV': '"production"'
+          }
+        }),
+        //使用压缩丑化js插件
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            },
+            mangle: {
+                except: ['$scope', '$']
+            }
+        }),
+        //拷贝文件到dist目录
+        new CopyWebpackPlugin(
+            [{
+                from: './src/app/image',
+                to: './image'
+            }
+            ]
+        ),
+        /**
+         * 调用dll的内容
+         * @type {[type]}
+         */
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            //这里引入manifest文件
+            manifest: require('./dist/vendor-manifest.json')
+        }),
+        /**
+         * 提取公共部分js
+         * @type {String}
+         */
+        new webpack.optimize.CommonsChunkPlugin({
+            names: 'vendor',
+            filename: 'public.js',
+            minChunks: Infinity,
+        }),
+        /**
+         * 提取css文件生成单独的css
+         */
+        new ExtractTextPlugin("[name]/[name].bundle.css")
+
+    ]
+}

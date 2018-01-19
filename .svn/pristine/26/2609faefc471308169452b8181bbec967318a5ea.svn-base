@@ -1,0 +1,127 @@
+@import '../../../.././utils/scss/public.scss'; //引入公共scss
+
+/*开关*/
+
+.swiper.on,
+.swiper.off,
+.swiper.default-off,
+.swiper.default-on {
+    display: inline-block;
+    width: 2.5rem;
+    height: 1.5rem;
+    background: #1bc780;
+    border-radius: 1.5rem;
+    position: relative;
+    .ball {
+        display: inline-block;
+        width: 1.3rem;
+        height: 1.3rem;
+        margin: 1px;
+        border-radius: 2.4rem;
+        background: #fff;
+        position: absolute;
+        left: 0;
+        z-index: 2;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    }
+    .slide {
+        background: #e5e5e5;
+        display: inline-block;
+        width: 2.5rem;
+        height: 1.5rem;
+        border-radius: 1.5rem;
+        position: absolute;
+        left: 0;
+        z-index: 1;
+    }
+}
+
+.default-on .ball {
+    left: 1rem;
+}
+
+.default-on .slideColor {
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+}
+
+.off .ball {
+    -webkit-animation: slideLeft 0.3s ease-in;
+    -webkit-animation-fill-mode: forwards;
+}
+
+.off .slideColor {
+    -webkit-animation: slideGray 0.5s ease-in;
+    -webkit-animation-fill-mode: forwards;
+}
+
+.on .ball {
+    -webkit-animation: slideRight 0.3s ease-in;
+    -webkit-animation-fill-mode: forwards;
+}
+
+.on .slideColor {
+    -webkit-animation: slideGreen 0.5s ease-in;
+    -webkit-animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes slideRight {
+    0%,
+    20% {
+        left: 0;
+    }
+    60%,
+    100% {
+        left: 1rem;
+    }
+}
+
+@-webkit-keyframes slideLeft {
+    0%,
+    20% {
+        left: 1rem;
+    }
+    60%,
+    100% {
+        left: 0;
+    }
+}
+
+@-webkit-keyframes slideGreen {
+    0%,
+    20% {
+        top: 0;
+        left: 0;
+        width: 2.5rem;
+        height: 1.5rem;
+    }
+    60%,
+    100% {
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+    }
+}
+
+@-webkit-keyframes slideGray {
+    0%,
+    20% {
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+    }
+    60%,
+    100% {
+        top: 0;
+        left: 0;
+        width: 2.5rem;
+        height: 1.5rem;
+    }
+}
+
+
+/*开关end*/

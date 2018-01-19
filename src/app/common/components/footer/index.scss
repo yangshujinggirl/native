@@ -1,0 +1,41 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.footer{
+  height: (110rem/$num);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: $color-white;
+  display: -webkit-box;
+  border-top: 1px solid $color-gray4;
+  .index,.myself{
+    -webkit-box-flex: 1;
+    text-align: center;
+    font-size: (24rem/$num);
+    margin-top:(20rem/$num);
+    &.active{
+      color: $color-orange;
+      .icon-home{
+        background: url(../../../image/icon/icon_home2.png) no-repeat;
+        background-size:cover;
+      }
+      .icon-myself{
+        background:url(../../../image/icon/icon_myself2.png) no-repeat;
+        background-size:cover;
+      }
+    }
+    .footer-icon{
+      width: (48rem/$num);
+      height: (48rem/$num);
+      display: inline-block;
+    }
+    .icon-home{
+      background: url(../../../image/icon/icon_home.png) no-repeat;
+      background-size:cover;
+    }
+    .icon-myself{
+      background:url(../../../image/icon/icon_myself.png) no-repeat;
+      background-size:cover;
+    }
+  }
+}

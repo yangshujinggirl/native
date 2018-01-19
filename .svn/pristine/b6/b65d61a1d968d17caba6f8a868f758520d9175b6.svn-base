@@ -1,0 +1,19 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.componet-nolist{
+ 
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  .no-list-img{
+    width: (142rem/$num);
+    height: (206rem/$num);
+    background: url(../../../image/icon/noList.png);
+    background-size:cover;
+  }
+  .no-list-tip{
+    text-align: center;
+    font-size: (30rem/$num);
+  }
+}

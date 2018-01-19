@@ -1,0 +1,45 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.set_safe{
+  .list{
+    li{
+      height: (100rem/$num);
+      line-height: (100rem/$num);
+      border-bottom: (1rem/$num) solid $color-gray4;
+      text-indent: (20rem/$num);
+      background-color: $color-white;
+      a{
+        color: $color-gray1;
+        font-size: (30rem/$num);
+        position: relative;
+        .list-left{
+          width: 77%;
+          display: inline-block;
+        }
+        .list-right{
+          position: absolute;
+          right: -40px;
+          font-size: (28rem/$num);
+        }
+        .list-icon{
+          position: absolute;
+          right: -20%;
+          margin-top: (40rem/$num);
+          width: (20rem/$num);
+          height: (20rem/$num);
+          border-top: 1px solid $color-gray3;
+          border-right: 1px solid $color-gray3;
+          transform: rotate(45deg);
+          -webkit-transform: rotate(45deg);
+        }
+      }
+    }
+    .first{
+      border-top: (1rem/$num) solid $color-gray4;
+      margin-top: (25rem/$num);
+    }
+    .install-login{
+      margin-top: (30rem/$num);
+      border-top: (1rem/$num) solid $color-gray4;
+    }
+  }
+}

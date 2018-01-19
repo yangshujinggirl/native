@@ -1,0 +1,25 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+body{
+  background-color: $color-white!important;
+}
+.user_success{
+  .success{
+    width: (102rem/$num);
+    height: (102rem/$num);
+    margin: (165rem/$num) auto 0;
+    background:url(../../../image/icon/success_icon.png);
+    background-size:cover;
+  }
+  .success_font{
+    font-size: (36rem/$num);
+    color: $color-gray1;
+    text-align: center;
+    margin-top: (35rem/$num);
+  }
+  .but{
+    margin-top: (80rem/$num);
+  }
+  .hollow{
+    margin-top: (40rem/$num);
+  }
+}

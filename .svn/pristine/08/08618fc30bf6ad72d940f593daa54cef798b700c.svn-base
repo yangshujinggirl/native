@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="keywords" content="<%= htmlWebpackPlugin.options.keywords %>" >
+    <meta name="description" content="<%= htmlWebpackPlugin.options.description %>" >
+    <meta name = "format-detection" content = "telephone=no">
+    <script type="text/javascript" src='../vendor.js'></script>
+  </head>
+  <body>
+    <div class="wrap-share-icon">
+      <img src="<%= htmlWebpackPlugin.options.shareIcon %>" class="share-icon" />
+    </div>
+  	<div id="root"></div>
+    <!-- Piwik -->
+  <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u='http://192.168.18.210/';
+      // var u='https://log.lingtouniao.cn/';
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', "5"]);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Piwik Code -->
+  </body>
+</html>

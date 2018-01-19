@@ -1,0 +1,141 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.activity-love-container{
+	font-size: (24rem/$num);
+	width: 100%;
+	background-color: #fff;
+	padding:(30rem/$num) (20rem/$num);
+	box-sizing: border-box;
+	background-size:(182rem/$num);
+	position: relative;
+	.content-wrap {
+		padding: (8rem/$num);
+		border: (5rem/$num) solid #ec3951;
+	}
+	.inner-content {
+		border: (2rem/$num) solid #ec3951;
+		padding:(100rem/$num) (26rem/$num) (66rem/$num);
+	}
+	.activity-love-title{
+		text-align: center;
+		margin:0 auto (80rem/$num);
+		.title-bg {
+			display: block;
+			width: (428rem/$num);
+			height: (70rem/$num);
+			background: url(../../../image/activity_lover/icon-title.png) no-repeat;
+			background-size: cover;
+			-webkit-background-size: cover;
+			margin:0 auto (60rem/$num);
+		}
+
+		.black {
+			font-size: (32rem/$num);
+		}
+	}
+	.wrap-register{
+		.wrap-input{
+			margin-bottom: (16rem/$num);
+			&.box-moudel {
+				display: -webkit-box;
+			  display: box;
+			  -webkit-box-align: center;
+			}
+			.common-input{
+				height: (70rem/$num);
+				line-height: (70rem/$num);
+				border: 1px solid #d23570;
+				border-radius: 2px;
+				padding-left: (20rem/$num);
+				box-sizing: border-box;
+				font-size: (24rem/$num);
+				background-color: #fbf5f5;
+			}
+			.input{
+				width: 100%;
+				@extend .common-input;
+			}
+			.code-input{
+				display: block;
+				box-flex: 1;
+		    -webkit-box-flex: 1;
+				width: (290rem/$num);
+				@extend .common-input;
+			}
+			.img-code{
+				width: (135rem/$num);
+				height: (66rem/$num);
+				margin-left: (70rem/$num);
+			}
+			.phone-code{
+				width: (180rem/$num);
+				height: (70rem/$num);
+				line-height: (60rem/$num);
+				margin-left: (20rem/$num);
+				color: #cc0860;
+				border: 1px solid #cc0860;
+				background-color: #fff;
+				font-size: (32rem/$num);
+				text-align: center;
+				&.disabled{
+					color: #b6b6b6;
+					border: 1px solid #b6b6b6;
+					background-color: #fff;
+				}
+			}
+		}
+		.love-btn{
+			width: (320rem/$num);
+			height: (81rem/$num);
+			background: url(../../../image/activity_lover/btn-register.png) no-repeat;
+			background-size: contain;
+			-webkit-background-size: contain;
+			margin: (110rem/$num) auto 0;
+			&.disabled {
+				background: url(../../../image/activity_lover/btn-register2.png) no-repeat;
+				background-size: contain;
+				-webkit-background-size: contain;
+			}
+		}
+	}
+	.slogin-footer {
+		text-align: center;
+		padding-top: (30rem/$num);
+		.icon-slogin {
+			display: inline-block;
+			width: (165rem/$num);
+			height: (46rem/$num);
+			background: url(../../../image/activity_lover/slogin.png) no-repeat;
+			background-size: contain;
+			-webkit-background-size: contain;
+		}
+		.slogin-text {
+			display: inline-block;
+			line-height: (46rem/$num);
+			padding-left: (20rem/$num);
+			border-left: 1px solid #ccc;
+			margin-left: (20rem/$num);
+		}
+	}
+	.top-bg {
+		width: 100%;
+		height: (272rem/$num);
+		box-sizing: border-box;
+		background:url(../../../image/activity_lover/top-bg.png) center no-repeat;
+		background-size:100%;
+		-webkit-background-size:100%;
+		position: absolute;
+		top:0;
+		right: 0;
+	}
+	.left-bg {
+		width: (182rem/$num);
+		height: (391rem/$num);
+		box-sizing: border-box;
+		background:url(../../../image/activity_lover/bottom-bg.png) center no-repeat;
+		background-size:100%;
+		-webkit-background-size:100%;
+		position: absolute;
+		bottom:0;
+		left: 0;
+	}
+}

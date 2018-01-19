@@ -1,0 +1,60 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+
+.head-content {
+  width: 100%;
+  height: (90rem/$num);
+  background-color: #fff;
+  position: fixed;
+  top:0;
+  left: 0;
+  display:table;
+  z-index: 999;
+  .head-wrap {
+    padding:0 (26rem/$num);
+    overflow: hidden;
+    zoom:1;
+    display:table-cell;
+    vertical-align:middle;
+  }
+  .left-part {
+    height: (44rem/$num);
+    float: left;
+    .logo-wrap {
+      height: (44rem/$num);
+      display: inline-block;
+      vertical-align: top;
+      padding-right: (20rem/$num);
+      margin-right: (20rem/$num);
+      border-right: 1px solid #ccc;
+    }
+    .icon-logo {
+      vertical-align: top;
+      width: (151rem/$num);
+    }
+    .theam-text {
+      vertical-align: top;
+      width: (196rem/$num);
+    }
+  }
+  .right-part {
+    height: (44rem/$num);
+    float: right;
+  }
+  .download {
+    width: (126rem/$num);
+    height: (44rem/$num);
+    line-height: (44rem/$num);
+    text-align: center;
+    border-radius: 4px;
+    font-size: (24rem/$num);
+    color: #fff;
+    vertical-align: top;
+    background: #ff6600;
+    background: linear-gradient(to right, #ff9a00,50%, #ff6600);
+    background: -webkit-linear-gradient(left, #ff9a00,50%, #ff6600);
+    background: -moz-linear-gradient(left center, #ff9a00, #ff6600);
+    background: -webkit-gradient(linear, left center, right center,from(#ff9a00), to(#ff6600));
+    background: -o-linear-gradient(left,#ff9a00, #ff6600);
+    background: -ms-linear-gradient(left,#ff9a00, #ff6600);
+  }
+}

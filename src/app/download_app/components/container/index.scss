@@ -1,0 +1,33 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+body{
+  background: $color-white;
+}
+.download-app{
+  .download-top{
+    padding-top: (150rem/$num);
+    .more{
+      font-size: (60rem/$num);
+      color: $color-orange;
+      text-align: center;
+    }
+    .downloadapp{
+      width: (494rem/$num);
+      height: (114rem/$num);
+      margin: 0 auto;
+      background: url(../../../image/download_app/download-app-font.png) no-repeat;
+      background-size: cover;
+    }
+    .download-but{
+      width: (490rem/$num);
+      display: block;
+      margin: (60rem/$num) auto 0;
+    }
+  }
+  .download-icon{
+    width: (406rem/$num);
+    height: (376rem/$num);
+    margin: (100rem/$num) auto 0;
+    background: url(../../../image/download_app/download-iphone.png) no-repeat;
+    background-size: cover;
+  }
+}

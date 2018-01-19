@@ -1,0 +1,176 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.container{
+  $color:#b78726;
+  img {
+    width: 100%;
+  }
+  .partOne {
+  	width: 100%;
+  	height: (1198rem/$num);
+  	background:url('../../../image/activity_backHome/partOne_bg.jpg') no-repeat top center;
+  	background-size: cover;
+  	-webkit-background-size: cover;
+    padding-top: (930rem/$num);
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    .headText {
+      width:(484rem/$num);
+      height: (198rem/$num);
+      line-height: (34rem/$num);
+      background:url('../../../image/activity_backHome/textBg.png') no-repeat top center;
+      background-size: contain;
+      -webkit-background-size: contain;
+      font-size: (24rem/$num);
+      color: $color;
+      padding:(36rem/$num);
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      margin:0 auto;
+    }
+  }
+  .part {
+    width: 100%;
+    text-align: center;
+    padding-top:(94rem/$num);
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font-size: 0.6rem;
+    color: $color;
+    .titleBg {
+      width:(304rem/$num);
+    }
+    .titleText {
+      width: (410rem/$num);
+      text-align: left;
+      padding: (20rem/$num) 0 (54rem/$num);
+      line-height: (34rem/$num);
+      margin:0 auto;
+    }
+    .btn {
+      display: inline-block;
+      width: (311rem/$num);
+      height: (108rem/$num);
+      margin-top: (20rem/$num);
+    }
+  }
+  .partTwo {
+    height: (1140rem/$num);
+    background:url('../../../image/activity_backHome/partTwo_bg.jpg') no-repeat top center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    .list {
+      width:(452rem/$num);
+      margin:0 auto;
+      .item {
+        margin-bottom: (22rem/$num);
+      }
+    }
+    .btn {
+      background:url('../../../image/activity_backHome/btn0.png') no-repeat top center;
+      background-size: contain;
+      -webkit-background-size: contain;
+    }
+  }
+  .partThr {
+    height: (861rem/$num);
+    background:url('../../../image/activity_backHome/partThr_bg.jpg') no-repeat top center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    .list {
+      width:(510rem/$num);
+      margin:0 auto;
+      .item {
+        margin-bottom: (20rem/$num);
+      }
+    }
+    .btn {
+      background:url('../../../image/activity_backHome/btn1.png') no-repeat top center;
+      background-size: contain;
+      -webkit-background-size: contain;
+    }
+  }
+  .partFour {
+    height: (926rem/$num);
+    background:url('../../../image/activity_backHome/partFour_bg.jpg') no-repeat top center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    .titleBg {
+      width: (336rem/$num);
+    }
+    .img {
+      width:(502rem/$num);
+    }
+    .btn {
+      background:url('../../../image/activity_backHome/btn2.png') no-repeat top center;
+      background-size: contain;
+      -webkit-background-size: contain;
+      margin-top: (30rem/$num);
+    }
+  }
+  .partFive {
+    height: (671rem/$num);
+    background:url('../../../image/activity_backHome/partFive_bg.jpg') no-repeat top center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    padding-left:(108rem/$num);
+    padding-right:(68rem/$num);
+    text-align:left;
+    .titleBg {
+      width: (196rem/$num);
+    }
+    .text {
+      padding-top:(40rem/$num);
+      line-height: (54rem/$num);
+    }
+    .info {
+      padding-top:(40rem/$num);
+      color: #cfc6b3;
+      text-align: right;
+    }
+  }
+  .cover {
+    display: none;
+    width:100%;
+    height: 100%;
+    background:rgba(0,0,0,.4);
+    position: fixed;
+    left:0;
+    top:0;
+    &.show {
+      display: block;
+    }
+  }
+  .alert {
+    display: none;
+    width:(584rem/$num);
+    height: (716rem/$num);
+    background:url('../../../image/activity_backHome/alertBg.png') no-repeat top center;
+    background-size: contain;
+    -webkit-background-size: contain;
+    font-size: (24rem/$num);
+    color:$color;
+    padding:(142rem/$num) (50rem/$num) 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    position: fixed;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    .content {
+      font-size: (40rem/$num);
+      padding-bottom:(66rem/$num);
+    }
+    .btn {
+      width: (311rem/$num);
+      height: (108rem/$num);
+      background:url('../../../image/activity_backHome/btn3.png') no-repeat top center;
+      background-size: contain;
+      -webkit-background-size: contain;
+      margin:(100rem/$num) auto 0;
+    }
+    &.show {
+      display: block;
+    }
+  }
+}

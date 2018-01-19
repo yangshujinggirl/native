@@ -1,0 +1,99 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.activity-love-container{
+	font-size: (24rem/$num);
+	width: 100%;
+	padding:(196rem/$num) (20rem/$num) (30rem/$num);
+	box-sizing: border-box;
+	background:#fff;
+	position: relative;
+
+	.love-info{
+		width: (420rem/$num);
+		padding:(8rem/$num);
+		border: (5rem/$num) solid #ec3951;
+		box-sizing: border-box;
+		background-color: rgba(255,255,255,.6);
+		margin: 0 auto (130rem/$num);
+		.love-bd {
+			padding: (70rem/$num) (60rem/$num);
+			border: (2rem/$num) solid #ec3951;
+		}
+	}
+	.font{
+		font-size: (30rem/$num);
+		color: $color-black;
+	}
+	.love-name{
+		@extend .font;
+		margin-bottom: (40rem/$num);
+	}
+	.love-item{
+		@extend .font;
+		text-decoration: underline;
+		padding-top: (30rem/$num);
+		margin-left: (30rem/$num);
+		margin-right: (20rem/$num);
+		line-height: 200%;
+	}
+	.love-user{
+		@extend .font;
+		margin-top: (70rem/$num);
+		text-align: right;
+	}
+	.love-btn{
+		width: (344rem/$num);
+		height: (82rem/$num);
+		background: url(../../../image/activity_lover/activity_lover_btn1.png) no-repeat;
+		background-size: contain;
+		-webkit-background-size: contain;
+		margin: 0 auto (100rem/$num);
+	}
+	.like-code {
+		text-align: center;
+		margin-bottom: (100rem/$num);
+		.icon-code {
+			width: (302rem/$num);
+		}
+	}
+	.slogin-footer {
+		text-align: center;
+		padding-top: (30rem/$num);
+		.icon-slogin {
+			display: inline-block;
+			width: (165rem/$num);
+			height: (46rem/$num);
+			background: url(../../../image/activity_lover/slogin.png) no-repeat;
+			background-size: contain;
+			-webkit-background-size: contain;
+		}
+		.slogin-text {
+			display: inline-block;
+			line-height: (46rem/$num);
+			padding-left: (20rem/$num);
+			border-left: 1px solid #ccc;
+			margin-left: (20rem/$num);
+		}
+	}
+	.top-bg {
+		width: 100%;
+		height: (272rem/$num);
+		box-sizing: border-box;
+		background:url(../../../image/activity_lover/top-bg.png) center no-repeat;
+		background-size:100%;
+		-webkit-background-size:100%;
+		position: absolute;
+		top:0;
+		right: 0;
+	}
+	.left-bg {
+		width: (182rem/$num);
+		height: (391rem/$num);
+		box-sizing: border-box;
+		background:url(../../../image/activity_lover/bottom-bg.png) center no-repeat;
+		background-size:100%;
+		-webkit-background-size:100%;
+		position: absolute;
+		top:(665rem/$num);
+		left: 0;
+	}
+}

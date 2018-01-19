@@ -1,0 +1,17 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.button{
+		text-align: center;
+		padding: (40rem/$num) 0;
+		.btn{
+			width: (560rem/$num);
+			height: (78rem/$num);
+			border-radius: 4px;
+			color: #fff;
+			background-color: #5bdb82;
+			margin-top: (20rem/$num);
+		}
+		.androBtn {
+			background-color: #43c7f9;
+		}
+
+}

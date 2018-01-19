@@ -1,0 +1,98 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.activity-love-container{
+	font-size: (24rem/$num);
+	width: 100%;
+	padding:(30rem/$num) (20rem/$num);
+	box-sizing: border-box;
+	background:#fff;
+	position: relative;
+	.content-wrap {
+		padding: (8rem/$num);
+		border: (5rem/$num) solid #ec3951;
+	}
+	.inner-content {
+		border: (2rem/$num) solid #ec3951;
+		padding:(100rem/$num) 0 (66rem/$num);
+	}
+	.activity-love-title{
+		text-align: center;
+		margin:0 auto (80rem/$num);
+		.title-bg {
+			display: block;
+			width: (428rem/$num);
+			height: (70rem/$num);
+			background-image: url(../../../image/activity_lover/icon-title.png);
+			background-size: cover;
+			margin:0 auto (60rem/$num);
+		}
+		.title-text {
+			.title-row {
+				margin-bottom: (30rem/$num);
+			}
+			.big-size {
+				font-weight: bold;
+				font-size: (28rem/$num);
+			}
+			.biger-size {
+				font-weight: bold;
+				font-size: (30rem/$num);
+			}
+			.bigest-size {
+				font-weight: bold;
+				font-size: (32rem/$num);
+			}
+		}
+
+	}
+	.img-content {
+		width: (530rem/$num);
+		height: (678rem/$num);
+		background:url(../../../image/activity_lover/success-bg.png) center no-repeat;
+		background-size:cover;
+		margin: 0 auto (108rem/$num);
+	}
+	.weixin-code {
+		text-align: center;
+		.icon-weixin {
+			width: (254rem/$num);
+		}
+	}
+	.slogin-footer {
+		text-align: center;
+		padding-top: (30rem/$num);
+		.icon-slogin {
+			display: inline-block;
+			width: (166rem/$num);
+			height: (46rem/$num);
+			background-image: url(../../../image/activity_lover/slogin.png);
+			background-size: cover;
+		}
+		.slogin-text {
+			display: inline-block;
+			line-height: (46rem/$num);
+			padding-left: (20rem/$num);
+			border-left: 1px solid #ccc;
+			margin-left: (20rem/$num);
+		}
+	}
+	.top-bg {
+		width: 100%;
+		height: (272rem/$num);
+		box-sizing: border-box;
+		background:url(../../../image/activity_lover/top-bg.png) center no-repeat;
+		background-size:100%;
+		position: absolute;
+		top:0;
+		right: 0;
+	}
+	.left-bg {
+		width: (182rem/$num);
+		height: (391rem/$num);
+		box-sizing: border-box;
+		background:url(../../../image/activity_lover/bottom-bg.png) center no-repeat;
+		background-size:100%;
+		position: absolute;
+		bottom:(310rem/$num);
+		left: 0;
+	}
+}

@@ -1,0 +1,84 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.form{
+	width: 100%;
+	.wrap-register{
+		padding:0 (40rem/$num);
+		.wrap-input{
+			margin-top: (20rem/$num);
+			position:relative;
+			.common-input{
+				height: (70rem/$num);
+				line-height: (70rem/$num);
+				border-radius: 4px;
+				padding: 0 (20rem/$num);
+				font-size: (24rem/$num);
+				box-sizing:border-box;
+				background-color: #fff;
+			}
+			.icon {
+				position:absolute;
+				right: (20rem/$num);
+				top:50%;
+				transform: translateY(-50%);
+				-webkit-transform: translateY(-50%);
+			}
+			.icon-type-eye {
+				right: (60rem/$num);
+			}
+			.input{
+				width: 100%;
+				@extend .common-input;
+			}
+			.short {
+				width: (320rem/$num);
+				display: inline-block;
+				position:relative;
+			}
+			.code-input{
+				width: (320rem/$num);
+				@extend .common-input;
+			}
+			.img-code{
+				width: (218rem/$num);
+				height: (70rem/$num);
+				 margin-left: (20rem/$num);
+			}
+			.phone-code{
+				width: (218rem/$num);
+				height: (70rem/$num);
+				line-height: (70rem/$num);
+				margin-left: (20rem/$num);
+				color: #fff;
+				background-color: #fcbd01;
+				font-size: (30rem/$num);
+				text-align: center;
+				vertical-align: top;
+				&.disabled{
+					color: #b6b6b6;
+					background-color: #fff;
+				}
+			}
+		}
+		.label{
+			display: inline-block;
+			font-size: (24rem/$num);
+			color:#666;
+			margin-left: (20rem/$num);
+		}
+		.serve {
+			color:#fe8900;
+		}
+		.button-register {
+			margin:0;
+		}
+	}
+	.alert-content {
+		font-size: (24rem/$num);
+		margin-top: (20rem/$num);
+	}
+	.button1 {
+		background-color: #fcbd01;
+		color: #fff;
+	}
+
+}

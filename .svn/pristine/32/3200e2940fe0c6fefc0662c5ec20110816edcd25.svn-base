@@ -1,0 +1,155 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.home {
+  .dataShow {
+    background-color: #FFF;
+    display: -webkit-box;
+    display: box;
+    margin-bottom: (16rem/$num);
+    .item {
+      -moz-box-flex: 1; 
+      -webkit-box-flex: 1;
+      padding:(24rem/$num) 0 (24rem/$num) (40rem/$num);
+      box-sizing:border-box;
+      &:nth-child(1) {
+        border-right: 1px solid $color-gray4;
+      }
+    }
+    .dataHead {
+      font-size: (30rem/$num);
+      color: $color-gray1;
+      position:relative;
+      padding-left:(40rem/$num);
+      &:before {
+        content:'';
+        display: block;
+        width: (32rem/$num);
+        height: (32rem/$num);
+        position: absolute;
+        left:0;
+        top:50%;
+        margin-top:(-16rem/$num);
+      }
+    }
+    .one {
+      &:before {
+        background:url(../../../image/icon/icon_home.png) no-repeat;
+        background-size: contain;
+      }
+    }
+    .two {
+      &:before {
+        background:url(../../../image/icon/icon_home3.png) no-repeat;
+        background-size: contain;
+      }
+    }
+    .dataNum {
+      font-size: (22rem/$num);
+      color: $color-orange;
+      .highLight {
+        font-size: (46rem/$num);
+        font-weight: bold;
+        vertical-align: baseline;
+      }
+    }
+  }
+  .project {
+    margin-bottom: (16rem/$num);
+    position:relative;
+    .name {
+      padding:(24rem/$num) (36rem/$num);
+      background-color: #FFF;
+      border-bottom: 1px solid $color-bg;
+      .tx {
+        padding-left:(22rem/$num);
+        font-size: (30rem/$num);
+        line-height: (34rem/$num);
+        position:relative;
+        &:before {
+          content:'';
+          display: block;
+          width:(6rem/$num);
+          height: (34rem/$num);
+          background-color:$color-orange;
+          border-radius: (6rem/$num);
+          position: absolute;
+          left:0;
+        }
+      }
+    }
+    .projectDetail {
+       background-color: #FFF;
+       padding:(15rem/$num) (30rem/$num);
+       color: $color-gray2;
+       font-size: (24rem/$num);
+       .prop {
+          display: -webkit-box;
+          display: box;
+          padding-top:(30rem/$num);
+          .caption {
+            line-height: (66rem/$num);
+          }
+          .field {
+            display: block;
+            .unit {
+              font-style: normal;
+              font-size: (24rem/$num);
+            }
+          }
+          .fr {
+            -moz-box-flex: 1; 
+            -webkit-box-flex: 1;
+            .field {
+              font-size: (44rem/$num);
+              line-height: (44rem/$num);
+            }
+          }
+          .history {
+            .field {
+              color: $color-orange;
+              font-size: (60rem/$num);
+            }
+          }
+       }
+       .progressMap {
+          width: 100%;
+          height: (4rem/$num);
+          background-color: $color-gray2;
+           .inner {
+            width:50%;
+            height: 100%;
+            background-color: $color-orange;
+           }
+       }
+       .over {
+          width:(178rem/$num);
+          height: (178rem/$num);
+          background:url(../../../image/home/home_01.png);
+          background-size: contain;
+          position:absolute;
+          right: (50rem/$num);
+          top:(20rem/$num);
+          display: none;
+       }
+    }
+    &.no {
+      .projectDetail {
+        .over {
+          display: block;
+        }
+        .prop {
+          .money {
+            visibility : hidden;
+          }
+          .history {
+            .field {
+              color: $color-gray2;
+            }
+          }
+        }
+      }
+    }
+    &:last-child {
+      margin-bottom: (130rem/$num);
+    }
+  }
+}

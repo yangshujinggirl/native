@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>领投鸟官网平台_新手特权</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="/dist/extension_page_one/extension_page_one.bundle.css">
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="/dist/vendor.dll.js"></script>
+    <script src="/dist/commons.js"></script>
+    <script src="/dist/extension_page_one/extension_page_one.bundle.js"></script>
+</body>
+
+</html>

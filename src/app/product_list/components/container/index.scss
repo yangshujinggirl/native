@@ -1,0 +1,241 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.wrap-share-icon {
+  display: none;
+}
+.product-list-content {
+  font-size: (24rem/$num);
+  margin-top: (110rem/$num);
+  margin-bottom: (124rem/$num);
+  img {
+    width: 100%;
+  }
+  .nodata {
+    text-align: center;
+    padding: (20rem/$num);
+  }
+  .product-tyb {
+    background-color: $color-white;
+    margin-bottom: (24rem/$num);
+    .product-tyb-wrap{
+     padding: (56rem/$num) (70rem/$num);
+    }
+    .title {
+      font-size: (34rem/$num);
+      line-height: 100%;
+      color: $color-black;
+      position: relative;
+      padding-left: (18rem/$num);
+      margin-bottom: (40rem/$num);
+      &:before {
+        content: '';
+        width: (6rem/$num);
+        height: (34rem/$num);
+        background-color: #ea5504;
+        border-radius: .15rem;
+        position: absolute;
+        left: 0;
+      }
+    }
+    .info-content {
+      color: $color-gray2;
+      margin-bottom: (48rem/$num);
+      .item-info {
+        display: inline-block;
+        vertical-align: bottom;
+        &:not(:last-child) {
+          margin-right:(100rem/$num);
+        }
+        .value {
+          font-size: (88rem/$num);
+          color: $color-orange;
+          line-height: 100%;
+          height: (88rem/$num);
+          margin-bottom: (18rem/$num);
+        }
+        .lable {
+          line-height: (28rem/$num);
+        }
+        .use-tickit {
+          line-height: (28rem/$num);
+          padding-left: (38rem/$num);
+          box-sizing: border-box;
+          position: relative;
+          .icon-use {
+            width: (28rem/$num);
+            position: absolute;
+            left: 0;
+            top:50%;
+            transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
+          }
+          &:first-child {
+            margin-bottom: (18rem/$num);
+          }
+        }
+      }
+    }
+    .experience-btn {
+      font-size: (32rem/$num);
+      color: #fff;
+      background: #ff6600;
+      background: linear-gradient(to right, #ff9a00,50%, #ff6600);
+      background: -webkit-linear-gradient(left, #ff9a00,50%, #ff6600);
+      background: -moz-linear-gradient(left center, #ff9a00, #ff6600);
+      background: -webkit-gradient(linear, left center, right center,from(#ff9a00), to(#ff6600));
+      background: -o-linear-gradient(left,#ff9a00, #ff6600);
+      background: -ms-linear-gradient(left,#ff9a00, #ff6600);
+      border-radius:(100rem/$num);
+      width:100%;
+      height:(80rem/$num);
+    }
+  }
+  .product-normal {
+    background-color: $color-white;
+    color: $color-gray2;
+    margin-bottom: (24rem/$num);
+    .product-normal-wrap {
+
+    }
+    .title {
+      font-size: (32rem/$num);
+      color: $color-black;
+      padding:(24rem/$num) (40rem/$num);
+    }
+    .list-wrap {
+      padding:0 (16rem/$num) (40rem/$num);
+    }
+
+    .item-pr {
+      text-align: center;
+      box-shadow:0 0 (12rem/$num) rgba(0,0,0,.3);
+      &:not(:last-child) {
+        margin-bottom: (24rem/$num);
+      }
+
+    }
+    .item-title {
+      padding:(24rem/$num) (16rem/$num);
+      overflow: hidden;
+      zoom:1;
+      .ll,.rl {
+        float: left;
+      }
+      .ll {
+        line-height: (36rem/$num);
+        text-align: left;
+        position: relative;
+        .icons-list {
+          display: inline-block;
+          vertical-align: middle;
+        }
+        .item-icon {
+          font-size: (22rem/$num);
+          padding: 0 (8rem/$num);
+          display: inline-block;
+          vertical-align: middle;
+          height: (36rem/$num);
+          line-height: (36rem/$num);
+          border: 1px solid $color-orange;
+          border-radius: (18rem/$num);
+          margin-left:(8rem/$num);
+        }
+      }
+      .rl {
+        line-height: (36rem/$num);
+        float: right;
+        text-align: right;
+        color: $color-orange;
+        position: relative;
+        .xiangou {
+          padding-right: (20rem/$num);
+        }
+        .solid-arrow {
+          width: (6rem/$num);
+          height: (12rem/$num);
+          background: url(../../../image/icon/new_h5/jiantou2.png);
+          background-size: contain;
+          position: absolute;
+          right: 0;
+          top:50%;
+          transform: translateY(-50%);
+          -webkit-transform: translateY(-50%);
+        }
+        .bird-quan {
+          width: (36rem/$num);
+          &:first-child {
+            margin-right: (12rem/$num);
+          }
+        }
+      }
+    }
+    .item-process {
+      width: 100%;
+      height: 1px;
+      background-color: $color-gray4;
+      position: relative;
+      .inner {
+        height: 1px;
+        background-color: $color-orange;
+        position: absolute;
+        left: 0;
+        top:0;
+        .circle {
+          width: 4px;
+          height: 4px;
+          border-radius: 50%;
+          background-color: $color-orange;
+          position: absolute;
+          right: 0;
+          top:50%;
+          transform: translate(50%,-50%);
+          -webkit-transform: translate(50%,-50%);
+        }
+      }
+      &.stoped {
+        .inner {
+          background-color: $color-gray4;
+          .circle {
+            background-color: $color-gray4;
+          }
+        }
+      }
+    }
+    .item-content {
+      padding:(32rem/$num) 0;
+    }
+    .row {
+      margin-bottom:(32rem/$num);
+      .value-prece {
+        font-size: (56rem/$num);
+        color: $color-orange;
+        &.stoped {
+          color: $color-gray2;
+        }
+      }
+    }
+    .row-thr {
+      font-size: (28rem/$num);
+      display: flex;
+      display: -ms-flex;      /* TWEENER - IE 10 */
+      display: -webkit-flex;
+      align-items: center;
+      -webkit-align-items: center;
+      -moz-align-items: center;
+      -ms-align-items: center;
+      -o-align-items: center;
+      .item-thr {
+        flex: 1;
+        -webkit-flex: 1;          /* Chrome */
+        -ms-flex: 1;
+      }
+      .icon-item {
+        width: (28rem/$num);
+        margin-right: (10rem/$num)
+      }
+      .value,.icon-item {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+  }
+}

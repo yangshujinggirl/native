@@ -1,0 +1,92 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.Container {
+	.t1,.t2 {
+		box-flex: 1;
+		-webkit-box-flex: 1;
+	}
+	.t1 {
+		text-align: left;
+	}
+	.t2 {
+		text-align: right;
+	}
+	.top {
+		background-color: #FFF;
+		position:relative;
+		padding:(24rem/$num) (20rem/$num);
+		.bank {
+			font-size: (30rem/$num);
+	    display: -webkit-box;
+	    display: box;
+	    color: $color-gray1;
+			.bankIcon {
+				width: (68rem/$num);
+				vertical-align: middle;
+			}
+			.bankName {
+				vertical-align: middle;
+				padding-left: (20rem/$num);
+			}
+		}
+		.limit {
+			font-size: (26rem/$num);
+			color: $color-gray2;
+			text-align: right;
+			position:absolute;
+			top:(70rem/$num);
+			right: (20rem/$num);
+		}
+	}
+
+	.balance {
+		padding:(20rem/$num);
+		font-size: (24rem/$num);
+		color: $color-gray1;
+	}
+	.recharge {
+		background-color: #FFF;
+		font-size: (28rem/$num);
+		padding:0 (20rem/$num);
+		border-bottom: 1px solid $color-gray4;
+		border-top: 1px solid $color-gray4;
+		.moneyNum {
+			padding-right:(20rem/$num);
+			position:relative;
+			top:-.7rem;
+		}
+		.moneyInput {
+			padding-left:(10rem/$num);
+			width: 10rem;
+			height: 2.5rem;
+		}
+	}
+	.open {
+		color: $color-gray2;
+		font-size: (28rem/$num);
+		padding:(30rem/$num) (20rem/$num);
+		background-color: #FFF;
+		display: -webkit-box;
+    display: box;
+    border-bottom: 1px solid $color-gray4;
+    .t1 {
+    	position:relative;
+    	line-height: (60rem/$num);
+    	.icon-info {
+	    	content:'';
+	    	width:(26rem/$num);
+	    	height: (26rem/$num);
+	    	background: url(../../../image/icon/icon_recharge2.png) no-repeat;
+	    	background-size: cover;
+	    	position:absolute;
+	    	right:50%;
+	    	top:50%;
+	    	margin-top: (-13rem/$num);
+	    	margin-right: (-40rem/$num);
+    	}
+    }
+	}
+	.parent {
+		margin-top: (40rem/$num);
+	}
+
+}

@@ -1,0 +1,210 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.Container {
+	font-size: (24rem/$num);
+	color: $color-gray2;
+	.t1,.t2 {
+		box-flex: 1;
+		-webkit-box-flex: 1;
+	}
+	.t1 {
+		text-align: left;
+	}
+	.t2 {
+		text-align: right;
+	}
+	.high {
+		color: $color-orange;
+		padding-left: (30rem/$num);
+	}
+	.gettime {
+		color: $color-gray2;
+		font-size:(24rem/$num);
+		padding:(10rem/$num) (20rem/$num) (35rem/$num);
+	}
+	.buyMoney {
+		padding:(35rem/$num) (20rem/$num);
+		display: -webkit-box;
+		display: box;
+		font-size: (30rem/$num);
+		color: $color-black;
+		background-color: #FFF;
+		border-top:(1rem/$num) solid $color-gray4;
+		border-bottom:(1rem/$num) solid $color-gray4;
+	}
+	.contant {
+		position:relative;
+		background-color: #f7f9f9;
+		border: 1px solid $color-bg;
+		padding:(12rem/$num) (55rem/$num) (22rem/$num) (20rem/$num);
+		.detail {
+			display: -webkit-box;
+			display: box;
+			.t1 {
+				font-size:(30rem/$num);
+				line-height: (40rem/$num);
+				color: $color-gray1;
+			}
+			.t2 {
+				text-align: right;
+				font-size: (22rem/$num);
+				line-height: (40rem/$num);
+				color: $color-gray2;
+			}
+		}
+		.desc {
+			font-size: (22rem/$num);
+			line-height: (30rem/$num);
+			color: $color-gray2;
+			padding-top:(10rem/$num);
+			.money {
+				color: $color-gray1;
+			}
+		}
+		.yesIcon {
+			width:(30rem/$num);
+			height: (30rem/$num);
+			background:url(../../../image/icon/success_icon.png) no-repeat;
+			background-size: contain;
+			-webkit-background-size: contain;
+			position:absolute;
+			top:(50%);
+			margin-top: (-15rem/$num);
+			right: (15rem/$num);
+			display: none;
+			&.active{
+				display: block;
+			}
+		}
+	}
+	.security {
+		padding:0 (20rem/$num) (30rem/$num);
+		background-color: #FFF;
+		margin-bottom: (25rem/$num);
+		border-bottom: 1px solid $color-gray4;
+		border-top: 1px solid $color-gray4;
+		.change {
+			display: -webkit-box;
+			display: box;
+			padding:(24rem/$num) 0;
+			.t1 {
+				font-size: (22rem/$num);
+				color: $color-gray2;
+				.securityIcon {
+					display: inline-block;
+					width: (32rem/$num);
+					height: (21rem/$num);
+					background:url(../../../image/icon/icon_security.png) no-repeat;
+					background-size: contain;
+					-webkit-background-size: contain;
+					margin-right: (10rem/$num);
+					position:relative;
+					top:(-6rem/$num);
+				}
+			}
+			.t2 {
+				color: #0267ae;
+				font-size: (24rem/$num);
+			}
+		}
+	}
+	.list {
+		background-color: #FFF;
+		border-top: 1px solid $color-gray4;
+		.item {
+			display: -webkit-box;
+			display: box;
+			font-size:(28rem/$num);
+			color: $color-gray2;
+			padding:(36rem/$num) (20rem/$num);
+			border-bottom: 1px solid $color-gray4;
+			.t2 {
+				text-align: right;
+			}
+			
+			.num {
+				color: $color-orange;
+				padding:0 (20rem/$num);
+			}
+			.pay {
+				color: $color-gray1;
+			}
+			.payMoney {
+				color: $color-black;
+				font-size: (30rem/$num);
+			}
+		}
+	}
+
+	.alert {
+		width: (530rem/$num) ;
+		background-color: #fff;
+		border-radius: 4px;
+		-webkit-border-radius: 4px;
+		position:fixed;
+		top:50%;
+		left:50%;
+		transform: translate(-50%,-50%);
+		-webkit-transform:translate(-50%,-50%);
+		padding:0 (20rem/$num) (76rem/$num);
+		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		z-index: 9999;
+		
+		.title {
+			width: 100%;
+			font-size: (36rem/$num);
+			color:$color-black;
+			padding:(80rem/$num) 0 (50rem/$num);
+			box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			text-align: center;
+			font-weight: normal;
+			position:relative;
+			// top:0;
+			// left: 50%;
+   //  	transform: translateX(-50%);
+			.close {
+				width:(47rem/$num);
+				height:(47rem/$num);
+				background:url(../../../image/icon/icon_security01.png) no-repeat;
+				background-size: contain;
+				-webkit-background-size: contain;
+				position:absolute;
+				top:(22rem/$num);
+				right: (22rem/$num);
+			}
+		}
+		.tickitList {
+			height: (540rem/$num);
+			// margin-top: (160rem/$num);
+			overflow: scroll;
+			.ite {
+				margin-bottom: (20rem/$num);
+				.contant {
+					.detail {
+						.t1 {
+							font-size:(26rem/$num);
+						}
+					}
+				}
+			}
+		}
+	}
+	.cover {
+		width: 100%;
+		height: 100%;
+		position:fixed;
+		top:0;
+		left:0;
+		background-color:rgba(0,0,0,.2);
+		z-index: 2;
+		display: none;
+	}
+	.parent {
+		margin-top:(70rem/$num);
+		text-align: center;
+		.sure {
+			margin:0;
+		}
+	}
+}

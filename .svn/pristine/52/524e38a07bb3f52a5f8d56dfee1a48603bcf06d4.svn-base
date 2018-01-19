@@ -1,0 +1,49 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.Container {
+	font-size: (28rem/$num);
+	color: $color-gray2;
+	.list {
+		margin-bottom: (20rem/$num);
+		padding:0 (30rem/$num);
+		background-color: #FFF;
+		border-bottom: 1px solid $color-gray4;
+		.item {
+			display: -webkit-box;
+			display: box;
+			padding:(40rem/$num) 0;
+			border-bottom: 1px dashed $color-gray4;
+			.t1,.t2 {
+				box-flex: 1;
+				-webkit-box-flex: 1;
+			}
+			.t1 {
+				text-align: left;
+			}
+			.t2 {
+				text-align: right;
+				color: $color-black;
+				&.red {
+					color: $color-orange;
+				}
+			}
+			&:last-child {
+				border-bottom: none;
+			}
+		}
+	}
+	.time {
+		padding:0 (30rem/$num);
+		font-size: (24rem/$num);
+	}
+	.parent {
+		position: absolute;
+		width: 100%;
+		padding:(17rem/$num) 0;
+		text-align: center;
+		bottom:0;
+		background-color: #FFF;
+		.sure {
+			margin:0;
+		}
+	}
+}

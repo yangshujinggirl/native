@@ -1,0 +1,558 @@
+import React,{Component} from 'react';//引入react
+import './index.scss?l';//引入css文件
+import Alert from 'alert';//引入alert组件
+import Input from 'input';//引入input组件
+import InputGroup from 'inputGroup';//引入input组件
+import Icon from 'icon';//引入图标组件
+import Loading from 'loading';//引入loading组件
+import Button from 'button';//引入button组件
+import LoginOver from 'loginOver';//引入登录超时组件
+import Checkbox from 'checkbox';//引入checkbox组件
+/**
+ * 引入fetch
+ */
+import 'fetchJs';
+import 'whatwg-fetch';
+import { config,strUtil,bussinessUtil,sessionUtil,dataUtil,urlUtil,dateUtil } from 'publicJs';
+var id=urlUtil.getSearch('id');//产品id
+var sessionKey=sessionUtil.get('sessionKey');//获取sessionkey
+var detailData;//详情数据
+var orderInfo;//下单的信息
+var usableBalance=bussinessUtil.getUsableBalance();//获取用户余额
+//组合组件
+export default class Container extends Component{
+	constructor(props){
+		super(props);
+    this.state={
+      alertText: '',//提示框文本
+      alertShow: false,//提示框默认不显示
+      alert2Show: false,//是否实名默认不显示
+      alert3Show: false,//是否绑卡框默认不显示
+      alert4Show: false,//充值框默认不显示
+      isLoading: true,//loading状态
+      isLoading2: false,//提交loading
+      money: '',//金钱
+      moneyIsTrue: false,//金钱是否正确
+      moneyErrorText: '',//金钱错误提示
+      disabled: true,//按钮是否可以点击
+      loginShow: false, //是否显示登录超时
+      checked: true,//协议按钮是否选中
+    };
+	}
+	//组件完成加载
+	componentDidMount(){
+		/**
+     * 适配屏幕
+     */
+    bussinessUtil.configScreen();
+    this.getData();
+	}
+  /**
+   * 获取详情数据
+   * @return {[type]} [description]
+   */
+  getData=()=>{
+    let url=`/productDetail`;
+    let param=`sessionKey=${sessionKey}&id=${id}`;
+    let successCall=(data)=>{
+        detailData=data.data;
+        this.setState({isLoading: false});
+    }
+    let errorCall=(data)=>{
+      let error=dataUtil.getMessage(data.resultCode);
+      this.updateText(error,true);//更新弹窗
+    }
+    let errorCall2=(e)=>{
+      this.updateText(e,true);//更新弹窗
+    }
+    dataUtil.getData(url,'POST',param,successCall,errorCall,errorCall2);
+  }
+  //协议点击事件
+  changeCheck=()=>{
+    if(!this.state.checked){
+      if(this.state.moneyIsTrue){
+        this.setState({disabled: false,checked: !this.state.checked});
+      }else{
+        this.setState({checked: !this.state.checked});
+      }
+
+    }else{
+      this.setState({disabled: true,checked: !this.state.checked});
+    }
+  }
+  //购买记录
+  btnhistory=()=>{
+   window.location.href=`../account_history/account_history.html?id=${id}`;
+  }
+  /**
+   * 未实名回调
+   * @return {[type]} [description]
+   */
+  realnameCall=()=>{
+    this.setState({alert2Show:true});
+  }
+  /**
+   * 未绑卡回调
+   * @return {[type]} [description]
+   */
+  cardCall=()=>{
+    this.setState({alert3Show:true});
+  }
+  /**
+   * 余额不足回调
+   * @return {[type]} [description]
+   */
+  rechargeCall=()=>{
+    bussinessUtil.setCurrentPage();//当前页面传入session
+    this.setState({alert4Show:true});
+  }
+  /**
+   * 取消实名
+   * @return {[type]} [description]
+   */
+  realnameAlertClick1=()=>{
+    this.setState({alert2Show:false});
+  }
+  /**
+   * 去实名
+   * @return {[type]} [description]
+   */
+  realnameAlertClick2=()=>{
+    bussinessUtil.goRealname(location.href);
+  }
+  /**
+   * 取消绑卡
+   * @return {[type]} [description]
+   */
+  cardAlertClick1=()=>{
+    this.setState({alert3Show:false});
+  }
+  /**
+   * 去绑卡
+   * @return {[type]} [description]
+   */
+  cardAlertClick2=()=>{
+    bussinessUtil.goCard(location.href);
+  }
+  /**
+   * 取消充值
+   * @return {[type]} [description]
+   */
+  rechargeAlertClick1=()=>{
+    this.setState({alert4Show:false});
+  }
+  /**
+   * 去充值
+   * @return {[type]} [description]
+   */
+  rechargeAlertClick2=()=>{
+    bussinessUtil.goRecharge(location.href);
+  }
+  //点击购买
+  btnClick=()=>{
+    if(strUtil.isEmpty(this.state.moneyErrorText)){
+      /**
+       * 是否登录
+       * @param  {[type]} bussinessUtil.isLogin [description]
+       * @return {[type]}                       [description]
+       */
+      if(!bussinessUtil.isLogin()){
+        bussinessUtil.goLogin(location.href);
+      }else{
+        /**
+         * 是否实名
+         * @param  {[type]} !bussinessUtil.isRealname() [description]
+         * @return {[type]}                             [description]
+         */
+        if(!bussinessUtil.isRealname()){
+          this.realnameCall();//未实名回调
+        }else{
+          /**
+           * 是否绑卡
+           * @param  {[type]} !bussinessUtil.isCard [description]
+           * @return {[type]}                       [description]
+           */
+          if(!bussinessUtil.isCard()){
+            this.cardCall();//未绑卡回调
+          }else{
+            /**
+             * 余额是否足
+             */
+            if(this.state.money>parseFloat(usableBalance)){
+              this.rechargeCall();//余额不足回调
+            }else{
+              this.setState({isLoading2: true});
+              let url=`/user/order/orderPrepare`;
+              let param=`sessionKey=${sessionKey}&productId=${id}&orderAmount=${this.state.money}`;
+              let successCall=(data)=>{
+                  orderInfo=data.data;
+                  orderInfo.userOrderMoney=this.state.money;
+                  orderInfo.productId=id;
+                  //新手标
+                  if(strUtil.formatData(detailData.productType)=='XSB'){
+                    orderInfo.coupons.length=0;//新手标不使用理财金券
+                    orderInfo.birdCoin=0;//新手标不使用鸟币
+                  }
+                  bussinessUtil.setPageInfo(orderInfo);//传递数据到下单页
+                  this.setState({isLoading2: false});
+                  window.location.href='../invest/invest.html';
+              }
+              let errorCall=(data)=>{
+                /**
+                 * 如果resultCode等于10000006,则弹出去登录的弹窗,否则就是正常的提示弹窗
+                 */
+                if(data.resultCode==config.loginTimeOver){
+                    this.setState({loginShow: true,isLoading2:false});
+                }else{
+                  let error=dataUtil.getMessage(data.resultCode);
+                  this.updateText(error,true);//更新弹窗
+                }
+              }
+              let errorCall2=(e)=>{
+                this.updateText(e,true);//更新弹窗
+              }
+              dataUtil.getData(url,'POST',param,successCall,errorCall,errorCall2);
+            }
+          }
+        }
+      }
+    }else{
+      this.updateText(this.state.moneyErrorText,true);//更新弹窗
+    }
+  }
+
+  //修改提示框内容
+  updateText=(text,show)=>{
+    this.setState({alertText: text,alertShow: show});
+    //如果show为true
+    if(show){
+      setTimeout(()=>{this.setState({alertShow: false});},config.alertTime);
+    }
+  }
+  //同步用户更新的内容
+  updateValue=(text,type,isTrue,errorText)=>{
+    switch(type){
+      case '1':
+        //判断需要验证的规则是否正确
+        if(isTrue&&this.state.checked){
+          this.setState({money: text,moneyIsTrue: isTrue,moneyErrorText:errorText,disabled: false});
+        }else{
+          this.setState({money: text,moneyIsTrue: isTrue,moneyErrorText:errorText,disabled: true});
+        }
+      break;
+    }
+  }
+  /**
+   * 清空值
+   * @return {[type]} [description]
+   */
+  cleanValue=(e)=>{
+    switch(e.target.title){
+      case '1':
+      this.setState({money: '',moneyIsTrue: false,disabled:true});
+      break;
+    }
+  }
+
+	render(){
+    /**
+     * 处理内容部分
+     * @return {[type]} [description]
+     */
+		 //流程
+		 let processShow=()=>{
+			 if(strUtil.formatData(detailData.productType)=="LCTXL") {
+				 if(strUtil.formatData(detailData.secondCategoryId)=='1004001'||
+				 		strUtil.formatData(detailData.secondCategoryId)=='1004005') {
+							return <div className="sonList">
+		 									 <div className="son">
+		 										 <img src="../image/productDetail/product_1.png" alt="" className="icon"/>
+											 <p className="t1">加入乐巢投系列</p>
+		 									 </div>
+		 									 <div className="son">
+		 										 <img src="../image/productDetail/product_2.png" alt="" className="icon"/>
+		 										 <p className="t1">系统匹配项目标的</p>
+		 									 </div>
+		 									 <div className="son">
+		 										 <img src="../image/productDetail/product_3.png" alt="" className="icon"/>
+		 										 <p className="t1">到期退出理财计划</p>
+		 									 </div>
+		 									 <div className="son">
+		 										 <img src="../image/productDetail/product_4.png" alt="" className="icon"/>
+		 									 	 <p className="t1">到期还款</p>
+		 									 </div>
+		 								 </div>
+						} else {
+							 return <div className="sonList">
+												 <div className="son">
+													 <img src="../image/productDetail/product_1.png" alt="" className="icon"/>
+													 <p className="t1">加入理财计划系列</p>
+												 </div>
+												 <div className="son">
+													 <img src="../image/productDetail/product_2.png" alt="" className="icon"/>
+													 <p className="t1">系统匹配项目标的</p>
+												 </div>
+												 <div className="son">
+													 <img src="../image/productDetail/product_3.png" alt="" className="icon"/>
+													 <p className="t1">到期退出理财计划</p>
+												 </div>
+												 <div className="son">
+													 <img src="../image/productDetail/product_4.png" alt="" className="icon"/>
+												 	 <p className="t1">到期还款</p>
+												 </div>
+											 </div>
+					  }
+			 } else {
+				 return <div className="sonList">
+									 <div className="son">
+										 <img src="../image/productDetail/product_1.png" alt="" className="icon"/>
+										 <p className="t1">加入散标系列</p>
+									 </div>
+									 <div className="son">
+										 <img src="../image/productDetail/product_2.png" alt="" className="icon"/>
+										 <p className="t1">系统自动投向项目标的</p>
+									 </div>
+									 <div className="son">
+										 <img src="../image/productDetail/product_3.png" alt="" className="icon"/>
+										 <p className="t1">到期退出散标系列</p>
+									 </div>
+									 <div className="son">
+										 <img src="../image/productDetail/product_4.png" alt="" className="icon"/>
+										 <p className="t1">一次性收回本息</p>
+									 </div>
+								 </div>
+			 }
+		 }
+		 //协议
+		 let protocolShow=()=>{
+			 if(strUtil.formatData(detailData.productType)=="LCTXL"||strUtil.formatData(detailData.productType)=="XSB") {
+				 if(strUtil.formatData(detailData.secondCategoryId)=='1004001'||
+				 		strUtil.formatData(detailData.secondCategoryId)=='1004005') {//老的新手标和智投
+					 return <p>4. 项目协议：<a href="http://www.lingtouniao.com/ltn-static/protocol/ztproduct" className="high">《智投产品协议》</a></p>
+				 } else {
+					return  <p>4. 项目协议：<a href="http://www.lingtouniao.com/ltn-static/protocol/lcjhproduct" className="high">《理财计划协议》</a></p>
+				 }
+			 } else {
+				 return  <p>4. 项目协议：<a href="http://www.lingtouniao.com/ltn-static/protocol/loan" className="high">《借款协议》</a></p>
+			 }
+		 }
+    let dealCon=()=>{
+      if(this.state.isLoading){
+        return(
+          <div>
+         <Loading loading={this.state.isLoading} />
+         </div>
+        )
+
+      }else{
+        let dealData=()=>{
+          if(strUtil.isEmpty(detailData)){
+            return(
+              <div></div>
+            )
+          }else{
+            let dealBtn=()=>{
+              if(this.state.disabled){
+                return <Button btnCss='sure' btnText='确认购买' type='disabled' parentCss='parent'/>
+              }else{
+                return <Button btnCss='sure' btnText='确认购买' parentCss='parent' btnClick={this.btnClick}/>
+              }
+            }
+            let btn=dealBtn();
+            let processStyle={
+                width: strUtil.toFixed((parseFloat(strUtil.formatData(detailData.productTotalAmount))-parseFloat(strUtil.formatData(detailData.productRemainAmount)))*100/(parseFloat(strUtil.formatData(detailData.productTotalAmount))),0)+'%'
+            }
+            let dealInput=()=>{
+                //新手标
+                if(strUtil.formatData(detailData.productType)=='XSB'){
+                  let startMoney=parseFloat(strUtil.formatData(detailData.staInvestAmount));//起投金额
+                  let endMoney=parseFloat(strUtil.formatData(detailData.singleLimitAmount));//剩余金额
+                  let currentStartMoney=endMoney<startMoney?endMoney:startMoney;
+                  return <Input type="tel" className='input' updateText={this.updateText}
+                    dataType='money' index='1' value={this.state.money} placeholder={`起投金额为${currentStartMoney}元`}
+                    updateValue={this.updateValue} startMoney={currentStartMoney}
+                    endMoney={endMoney} startMoneyTip={`起投金额为${currentStartMoney}元`}
+                    endMoneyTip={`最大购买金额为${endMoney}元`} />
+                }else{
+                  let startMoney=parseFloat(strUtil.formatData(detailData.staInvestAmount));//起投金额
+                  let endMoney=parseFloat(strUtil.formatData(detailData.productRemainAmount));//剩余金额
+                  let currentStartMoney=endMoney<startMoney?endMoney:startMoney;
+                  return <Input type="tel" className='input' updateText={this.updateText}
+                    dataType='money' index='1' value={this.state.money} placeholder={`起投金额为${currentStartMoney}元`}
+                    updateValue={this.updateValue} startMoney={currentStartMoney}
+                    endMoney={endMoney} startMoneyTip={`起投金额为${currentStartMoney}元`}
+                    endMoneyTip={`最大购买金额为${endMoney}元`} />
+                }
+            }
+            let input=dealInput();
+            let buy;
+            let dealBuy=()=>{
+              if(strUtil.formatData(detailData.productStatus)=='1'){
+                buy=<div className="buy">
+                <InputGroup className='wrap-input'>
+                    {input}
+                  <Icon iconType='del' iconCss={`icon-type ${this.state.moneyIsTrue?'show-inline':'hide-hidden'}`}
+                  title='1' onClick={this.cleanValue} />
+                 </InputGroup>
+                 { btn }
+                </div>
+              }else{
+                buy=<div></div>
+              }
+            }
+            dealBuy();
+            /**
+             * 处理选框
+             */
+            var checkbox;
+            var dealCheckBox=()=>{
+              if(strUtil.formatData(detailData.productStatus)=='1'){
+                checkbox=<Checkbox checked={this.state.checked} parentCss='accept' changeCheck={this.changeCheck} >
+                <span className='agree'>我已阅读并同意</span>
+							{
+								strUtil.formatData(detailData.productType)=="LCTXL"?
+								(
+									(strUtil.formatData(detailData.secondCategoryId)=='1004001'||strUtil.formatData(detailData.secondCategoryId)=='1004005')?
+										<a href='http://www.lingtouniao.com/ltn-static/protocol/ztproduct' className='protocol'>《智投产品协议》</a>
+										:
+										<a href='http://www.lingtouniao.com/ltn-static/protocol/lcjhproduct' className='protocol'>《理财计划协议》</a>
+								)
+								:
+								<a href='http://www.lingtouniao.com/ltn-static/protocol/loan' className='protocol'>《借款协议》</a>
+							}
+
+              </Checkbox>
+              }else{
+                checkbox=<div></div>
+              }
+            }
+            dealCheckBox();
+            /**
+             * 处理选框结束
+             * @type {String}
+             */
+            return(
+           <div className="Container">
+              <div className="top">
+                <div className="productHead">
+                    <p className="head">{strUtil.formatData(detailData.productName)}</p>
+                    <div className="prop">
+                      <div className="fr">
+                        <div className="bigfield">
+                          <span className="tNum">
+                            {strUtil.formatPercent(strUtil.formatData(detailData.annualIncomeText))}
+                          </span>
+                          <i className="unit">%</i>
+                        </div>
+                        <span className="caption">历史年化收益率</span>
+                      </div>
+                      <div className="fr two">
+                        <div className="bigfield">
+                          <span className="tNum">{strUtil.formatData(detailData.productDeadline)}</span>
+                          <i className="unit">天</i>
+                        </div>
+                        <span className="caption">投资期限</span>
+                      </div>
+                    </div>
+                </div>
+                <div className="money">
+                  <div className="fr">
+                    <span className="field">{strUtil.formatData(detailData.staInvestAmount)}元</span>
+                    <span className="caption">起投金额</span>
+                  </div>
+                  <div className="fr">
+                    <span className="field">{strUtil.formatData(detailData.productTotalAmount)}元</span>
+                    <span className="caption">项目总金额</span>
+                  </div>
+                  <div className="fr">
+                    <span className="field">{strUtil.formatData(detailData.productRemainAmount)}元</span>
+                    <span className="caption">剩余金额</span>
+                  </div>
+                  <div className="process" style={processStyle}>
+                  </div>
+                  <span className="processText">进度{strUtil.toFixed((parseFloat(strUtil.formatData(detailData.productTotalAmount))-parseFloat(strUtil.formatData(detailData.productRemainAmount)))*100/(parseFloat(strUtil.formatData(detailData.productTotalAmount))),0)+'%'}</span>
+                </div>
+              </div>
+              <div className="goBack">
+                <div className="child one">
+                  <p>回款方式：<span>{strUtil.formatData(detailData.repaymentType)}</span></p>
+                </div>
+                <div className="child">
+                  <p>起息日期：<span>{dateUtil.formatDate('yyyy-MM-dd',strUtil.formatData(detailData.staRateDate))}</span></p>
+                </div>
+              </div>
+              <div className="project">
+                <div className="describe">项目描述</div>
+                <p className="text">
+                  {strUtil.formatData(detailData.productTitle)}
+                </p>
+              </div>
+              <div className="project step1">
+                <div className="describe">购买须知</div>
+                <div className="knowlist">
+									{
+										strUtil.formatData(detailData.productType)=="LCTXL"?
+										<p>1. 投标范围：根据系统匹配到不同的项目标的</p>
+										:
+										<p>1. 投标范围：投向消费分期、信用宝、赎楼贷、供应链金融等项目标的</p>
+									}
+                  <p>2. 投标期限：{strUtil.formatData(detailData.productDeadline)}天</p>
+                  <p>3. 加入条件：加入金额{strUtil.formatData(detailData.staInvestAmount)}元起</p>
+								{
+									protocolShow()
+								}
+                  <p>5. 保障方式：<a href="https://www.lingtouniao.com/h5/help-safe-security.html" className="high">《平台安全保障详情》</a></p>
+                </div>
+              </div>
+              <div className="project">
+                <div className="describe">购买流程</div>
+							{
+								processShow()
+							}
+              </div>
+              <div className="project step4" onClick={this.btnhistory}>
+                <div className="describe">购买记录</div>
+                <div className="record">
+                  <span className="arrow"></span>
+                </div>
+              </div>
+              { checkbox }
+              { buy }
+              <Loading loading={this.state.isLoading2} />
+              <Alert text={this.state.alertText} show={this.state.alertShow} />
+              <Alert  type='2'  show={this.state.alert2Show}
+              title=''  btn1Text='取消' btn2Text='下一步'
+               btn1Click={this.realnameAlertClick1}  btn2Click={this.realnameAlertClick2}>
+               <p className='alert-content'>您未完成用户实名认证,为了您的资金安全,请进行认证!</p>
+              </Alert>
+              <Alert  type='2'  show={this.state.alert3Show}
+              title=''  btn1Text='取消' btn2Text='下一步'
+               btn1Click={this.cardAlertClick1}  btn2Click={this.cardAlertClick2}>
+               <p className='alert-content'>绑定银行卡后方可进行充值投资,要不绑一张试试?</p>
+              </Alert>
+              <Alert  type='2'  show={this.state.alert4Show}
+              title=''  btn1Text='取消' btn2Text='充值'
+               btn1Click={this.rechargeAlertClick1}  btn2Click={this.rechargeAlertClick2}>
+               <p className='alert-content'>您的余额不足，请先进行充值。</p>
+              </Alert>
+              <LoginOver type='2' show={this.state.loginShow} />
+            </div>
+          )
+          }
+        }
+        let data=dealData();
+        return(
+           <div>
+           { data }
+           </div>
+        )
+      }
+    }
+    let con=dealCon();
+        return(
+            <div>
+              { con }
+            </div>
+            );
+      }
+}

@@ -1,0 +1,228 @@
+/**
+ * 页面统一颜色
+ */
+$color-orange: #ff6600;//用于需要强调突出的文字、按钮、icon
+$color-yellow: #ffc000;//小面积使用，用于特别需要强调突出的文字、按钮
+$color-blue: #0a54b0;//很少使用，用于特别需要强调突出的文字、按钮
+$color-black: #333;//用于重要级文字信息、内页标题信息
+$color-gray1: #666;//用于普通段落信息
+$color-gray2: #999;//用于次要文字信息
+$color-gray3: #adadad;//用于提示等辅助次要文字
+$color-gray4: #e5e5e5;//用于模块和内容之间的分割线
+$color-gray5: #ccc;//按钮不可点击状态
+$color-white: #fff;//用于背景上面的颜色
+$color-white2: rgba(255,255,255,.6);
+$color-bg: #f6f6f6;//用于背景底色
+$color-bg-nav: #fafafa;//用于导航栏背景色
+ /* px转rem
+ */
+$num: 40;
+
+@media only screen and (max-width: 321px) {
+    html {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (min-width: 321px) and (max-width: 360px) {
+    html {
+        font-size: 22.5px;
+    }
+}
+
+@media only screen and (min-width: 361px) and (max-width: 375px) {
+    html {
+        font-size: 23.4px;
+    }
+}
+
+@media only screen and (min-width: 376px) and (max-width: 414px) {
+    html {
+        font-size: 25.8px;
+    }
+}
+
+@media only screen and (min-width: 415px) and (max-width: 479px) {
+    html {
+        font-size: 27px;
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    html {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    html {
+        font-size: 32px;
+    }
+}
+@charset "utf-8";
+
+/*元素公共样式*/
+
+
+/* 清除内外边距 */
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+blockquote,
+
+/* structural elements 结构元素 */
+
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+
+/* list elements 列表元素 */
+
+pre,
+
+/* text formatting elements 文本格式元素 */
+
+fieldset,
+button,
+input,
+textarea,
+
+/* form elements 表单元素 */
+
+th,
+td {
+    /* table elements 表格元素 */
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: "微软雅黑", Tahoma, Arial, Helvetica, STHeiti;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    background-color: $color-bg;
+}
+
+
+/* 重置列表元素 */
+
+ul,
+ol {
+    list-style: none;
+    text-indent: 0;
+}
+
+span,
+i,
+img {
+    vertical-align: bottom;
+}
+
+
+/* 重置文本格式元素 */
+
+a {
+    text-decoration: none;
+    color: $color-white;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+    &:hover {
+        text-decoration: underline;
+        color: $color-white;
+    }
+}
+
+img {
+    border: none;
+}
+
+button,
+input,
+select,
+textarea {
+    font-size: 100%;
+    /* 使得表单元素在 ie 下能继承字体大小 */
+    background-color: transparent;
+    border: none;
+}
+
+p,
+div {
+    line-height: 150%;
+    word-break: break-all;
+    -webkit-appearance:none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    outline: none;
+
+}
+
+
+/* 重置表格元素 */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+input,
+textarea{
+    font-family: "微软雅黑", Tahoma, Arial, Helvetica, STHeiti;
+    border: none;
+    outline:none;
+}
+
+input::-webkit-input-placeholder，textarea:input::-webkit-input-placeholder{
+    color: $color-gray3;
+}
+input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+input {
+    background-color: transparent;
+}
+textarea {
+    resize: none;
+}
+button{
+    outline: none;
+}
+.show{
+    display: block!important;
+}
+.show-inline{
+    display: inline-block!important;
+}
+.hide{
+    display: none!important;
+}
+.hide-hidden{
+    visibility: hidden;
+}
+//分享图标
+.wrap-share-icon{
+    width: 0;
+    height: 0
+}
+.share-icon{
+    width: 0;
+    height: 0;
+}
+/*元素公共样式end*/
+//隐藏cnzz图标
+#cnzz_stat_icon_1258037212 {
+  display: none;
+}

@@ -1,0 +1,213 @@
+@import '../../../.././utils/scss/public.scss';//引入公共scss
+.account_viewall{
+  margin-top: (110rem/$num);
+  padding-bottom: (240rem/$num);
+  .viewall-top{
+    width: 100%;
+    height: (420rem/$num);
+    .viewall-login{
+      width: 100%;
+      height: (420rem/$num);
+      // background: url(../../../image/account/account-bg.png);
+      // background-size:cover;
+      background: #ff6600;
+      background: linear-gradient(to right, #ff9a00,50%, #ff6600);
+      background: -webkit-linear-gradient(left, #ff9a00,50%, #ff6600);
+      background: -moz-linear-gradient(left center, #ff9a00, #ff6600);
+      background: -webkit-gradient(linear, left center, right center,from(#ff9a00), to(#ff6600));
+      background: -o-linear-gradient(left,#ff9a00, #ff6600);
+      background: -ms-linear-gradient(left,#ff9a00, #ff6600);
+    }
+    .noLogin{
+      width: 100%;
+      height: (420rem/$num);
+      // background: url(../../../image/account/account-bg.png);
+      background: #ff6600;
+      background: linear-gradient(to right, #ff9a00,50%, #ff6600);
+      background: -webkit-linear-gradient(left, #ff9a00,50%, #ff6600);
+      background: -moz-linear-gradient(left center, #ff9a00, #ff6600);
+      background: -webkit-gradient(linear, left center, right center,from(#ff9a00), to(#ff6600));
+      background: -o-linear-gradient(left,#ff9a00, #ff6600);
+      background: -ms-linear-gradient(left,#ff9a00, #ff6600);
+      // background-size:cover;
+      position: absolute;
+      text-align: center;
+      left: 0;
+      top: 0;
+      .noLogin-icon{
+        width: (220rem/$num);
+        height: (89rem/$num);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%,-50%);
+        img{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .button{
+        width: (200rem/$num);
+        height: (60rem/$num);
+        line-height: (60rem/$num);
+        background-color: $color-yellow;
+        border-radius: (5rem/$num);
+        margin: (40rem/$num) 0 0 (-10rem/$num);
+        font-size:(30rem/$num);
+        color: #9c5b24;
+      }
+    }
+    .gains{
+      color: $color-white;
+      padding: (55rem/$num) (50rem/$num) 0;
+      .item{
+        font-size: (60rem/$num);
+      }
+      .filed{
+        font-size: (24rem/$num);
+        color: $color-white2;
+      }
+    }
+    .buttons{
+      text-align: right;
+      margin: (30rem/$num) (45rem/$num) 0 0;
+      .recharge,.postal{
+        width: (120rem/$num);
+        height: (60rem/$num);
+        font-size: (30rem/$num);
+        outline: none;
+        border-radius: (5rem/$num);
+      }
+      .recharge{
+        background: $color-yellow;
+        color: #fff;
+      }
+      .postal{
+        border: 1px solid $color-yellow;
+        margin-left: (40rem/$num);
+        color: #fff;
+      }
+    }
+    .assets{
+      height: (106rem/$num);
+      border-top: (1rem/$num) solid $color-gray4;
+      margin-top: (30rem/$num);
+      text-align: center;
+      .assets-item{
+        width: 33%;
+        height: (80rem/$num);
+        display: inline-block;
+        color: $color-white;
+        margin-top: (20rem/$num);
+        border-right: (1rem/$num) solid $color-gray4;
+        .num{
+          font-size: (26rem/$num);
+        }
+        .value{
+          font-size: (22rem/$num);
+          color: $color-white2;
+        }
+      }
+      .teshu{
+        border-right: 0;
+      }
+    }
+  }
+  .product{
+      background-color: $color-white;
+      border-top: (1rem/$num) solid $color-gray4;
+      border-bottom: (1rem/$num) solid $color-gray4;
+      margin-top: (30rem/$num);
+      font-size:0;
+      .investment,.security{
+        width: 38%;
+        height: (130rem/$num);
+        padding: 0 (40rem/$num);
+        display: inline-block;
+        text-align:center;
+        position: relative;
+        border-right: (1rem/$num) solid $color-gray4;
+      }
+      .security{
+         width: 36%;
+         border-right:0;
+      }
+      .felid{
+        font-size: (30rem/$num);
+        color: $color-gray1;
+        margin: (30rem/$num) 0 0 (50rem/$num);
+        display: inline-block;
+      }
+      .prod{
+        font-size: (24rem/$num);
+        color: $color-gray2;
+        display: inline-block;
+        margin-left: (80rem/$num);
+      }
+      .prod.special{
+        margin-left: (60rem/$num);
+      }
+      .product-num{
+        color: $color-black;
+      }
+      .product-icon{
+        width: (52rem/$num);
+        height: (60rem/$num);
+        position: absolute;
+        left: (40rem/$num);
+        top: (40rem/$num);
+      }
+      .three{
+        background: url(../../../image/account/account-icon1.png) no-repeat;
+        background-size: cover;
+      }
+      .five{
+        background: url(../../../image/account/account-icon2.png) no-repeat;
+        background-size: cover;
+      }
+  }
+  .viewall-list{
+    margin-top: (25rem/$num);
+    font-size: (30rem/$num);
+    li{
+      height: (100rem/$num);
+      line-height: (100rem/$num);
+      padding: 0 (80rem/$num);
+      background: $color-white;
+      border-top: (1rem/$num) solid $color-gray4;
+      border-bottom: (1rem/$num) solid $color-gray4;
+      position: relative;
+      .icon{
+        position: absolute;
+        left:(30rem/$num);
+        top:(30rem/$num);
+      }
+      span{
+        text-decoration: none;
+        color: $color-gray1;
+        margin-left: (20rem/$num);
+      }
+      .list-icon{
+        position: absolute;
+        right: 6%;
+        margin-top: (40rem/$num);
+        width: (20rem/$num);
+        height: (20rem/$num);
+        border-top: 1px solid $color-gray2;
+        border-right: 1px solid $color-gray2;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+      }
+    }
+    .set{
+      border-top: 0;
+    }
+    .down{
+      margin: (25rem/$num) 0 (125rem/$num) 0;
+      border:0;
+      span{
+        color: $color-orange;
+      }
+    }
+  }
+}
